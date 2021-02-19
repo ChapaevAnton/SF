@@ -11,9 +11,15 @@ public class Main {
         String andrew = scanner.nextLine();
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
-        System.out.println(encrypt(andrew, key));
-        andrew = encrypt(andrew, key);
-        System.out.println(deEncrypt(andrew, key));
+
+        String str = encrypt(andrew, key);
+        String str1 = encrypt(andrew, key, ATBASH_ENCRYPT);
+
+        System.out.println("XOR: "+str);
+        System.out.println("ATBASH: "+str1);
+
+        System.out.println(deEncrypt(str, key));
+        System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
 
 
     }
