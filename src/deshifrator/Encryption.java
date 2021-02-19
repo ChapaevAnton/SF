@@ -17,7 +17,7 @@ public final class Encryption {
         return xorEncrypting(text, encryptKey);
     }
 
-    //обработать null, и неправильный ввод ключа
+    //обработать null, и неправильный ввод ключа лялялля
     public static String encrypt(String text, String encryptKey, int typeCryptMethod) {
 
         String newText = switch (typeCryptMethod) {
