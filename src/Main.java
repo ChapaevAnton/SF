@@ -15,8 +15,8 @@ public class Main {
         String str = encrypt(andrew, key);
         String str1 = encrypt(andrew, key, ATBASH_ENCRYPT);
 
-        System.out.println(str);
-        System.out.println(str1);
+        System.out.println("XOR: "+str);
+        System.out.println("ATBASH: "+str1);
 
         System.out.println(deEncrypt(str, key));
         System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
