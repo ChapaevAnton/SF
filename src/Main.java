@@ -1,7 +1,7 @@
-import deshifrator.Encryption;
-
 import java.util.Scanner;
-import static deshifrator.Encryption.*;
+
+import static deshifrator.Encryption.deEncrypt;
+import static deshifrator.Encryption.encrypt;
 
 public class Main {
 
@@ -11,7 +11,7 @@ public class Main {
         System.out.print("Введите текст: ");
         String andrew = scanner.nextLine();
         System.out.print("Введите ключ: ");
-        int key = scanner.nextInt();
+        String key = scanner.nextLine();
         System.out.println(encrypt(andrew, key));
         andrew = encrypt(andrew, key);
         System.out.println(deEncrypt(andrew, key));

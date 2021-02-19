@@ -5,26 +5,33 @@ public final class Encryption {
     public final static int XOR_ENCRYPT = 1;
     public final static int ATBASH_ENCRYPT = 2;
 
-    public static String encrypt(String text, int key) {
-        return xorEncrypting(text, key);
+    public static String encrypt(String text, String encryptKey) {
+        return xorEncrypting(text, encryptKey);
     }
 
-    public static String deEncrypt(String text, int key) {
-        return xorEncrypting(text, key);
+    public static String deEncrypt(String text, String encryptKey) {
+        return xorEncrypting(text, encryptKey);
     }
 
 
-    public static String encrypt(String text, int key, int typeCryptMethod) {
+    public static String encrypt(String text, String encryptKey, int typeCryptMethod) {
 
         return text;
     }
 
-    private static String xorEncrypting(String text, int key) {
+    private static String xorEncrypting(String text, String encryptKey) {
         char[] texts = text.toCharArray();
-        for (int i = 0; i < text.length(); i++) {
-            int encrypt = texts[i];
-            text = text.replace(texts[i], (char) (encrypt ^ key));
+        byte[] keys = encryptKey.getBytes();
+        int key = 0;
+
+        for (byte item : keys) {
+            key += Byte.toUnsignedInt(item);
         }
+        System.out.println(key);
+        for (char item : texts) {
+            text = text.replace(item, (char) (item ^ key));
+        }
+
         return text;
     }
 
