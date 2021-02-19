@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-import static deshifrator.Encryption.deEncrypt;
-import static deshifrator.Encryption.encrypt;
+import static deshifrator.Encryption.*;
 
 public class Main {
 
