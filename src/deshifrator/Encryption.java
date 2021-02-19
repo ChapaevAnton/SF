@@ -57,9 +57,28 @@ public final class Encryption {
         return text;
     }
 
+
     //TODO Разработать
+    //Алфавит шифрования
+    private final static String ENCRYPT_ALPHABET =
+            "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
+    //Сложность алфавита шифрования
+    private final static int COMPLEXITY = ENCRYPT_ALPHABET.length() - 1;
+
     private static String atbashEncrypting(String text, String encryptKey, int algorithmMode) {
 
+        switch (algorithmMode) {
+            //если режим кодирования
+            case CODING_ALGORITHM_MODE -> {
+                char[] encodedArray = text.toCharArray();
+                for (int i = 0; i < encodedArray.length; i++) {
+                    int index = ENCRYPT_ALPHABET.indexOf(encodedArray[i]);
+                    index = COMPLEXITY - index;
+                    encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
+                }
+                text = String.valueOf(encodedArray);
+            }
+        }
         return text;
     }
 

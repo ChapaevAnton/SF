@@ -15,6 +15,8 @@ public class Main {
         andrew = encrypt(andrew, key);
         System.out.println(deEncrypt(andrew, key));
 
+        System.out.println(encrypt("ААААAAAA",key,ATBASH_ENCRYPT));
+
 
     }
 }
