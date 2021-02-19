@@ -11,11 +11,15 @@ public class Main {
         String andrew = scanner.nextLine();
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
+
         System.out.println(encrypt(andrew, key));
+        System.out.println(encrypt(andrew,key,ATBASH_ENCRYPT));
+
         andrew = encrypt(andrew, key);
+
         System.out.println(deEncrypt(andrew, key));
 
-        System.out.println(encrypt("ААААAAAA",key,ATBASH_ENCRYPT));
+
 
 
     }

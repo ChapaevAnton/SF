@@ -59,9 +59,10 @@ public final class Encryption {
 
 
     //TODO Разработать
+    //FIXME encryptKey - пока не учитывается
     //Алфавит шифрования
     private final static String ENCRYPT_ALPHABET =
-            "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
+            "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZ /*-+абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
     //Сложность алфавита шифрования
     private final static int COMPLEXITY = ENCRYPT_ALPHABET.length() - 1;
 
@@ -73,10 +74,19 @@ public final class Encryption {
                 char[] encodedArray = text.toCharArray();
                 for (int i = 0; i < encodedArray.length; i++) {
                     int index = ENCRYPT_ALPHABET.indexOf(encodedArray[i]);
-                    index = COMPLEXITY - index;
-                    encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
+                    //отсутсвует шифрующий символ в алфавите
+                    if (index != -1) {
+                        index = COMPLEXITY - index;
+                        encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
+                    } else {
+                        encodedArray[i] = '*';
+                    }
                 }
                 text = String.valueOf(encodedArray);
+            }
+
+            case DECODING_ALGORITHM_MODE -> {
+                //FIXME - доделать
             }
         }
         return text;
