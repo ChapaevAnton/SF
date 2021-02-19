@@ -12,14 +12,14 @@ public class Main {
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
 
-        System.out.println(encrypt(andrew, key));
-        System.out.println(encrypt(andrew,key,ATBASH_ENCRYPT));
+        String str = encrypt(andrew, key);
+        String str1 = encrypt(andrew, key, ATBASH_ENCRYPT);
 
-        andrew = encrypt(andrew, key);
+        System.out.println(str);
+        System.out.println(str1);
 
-        System.out.println(deEncrypt(andrew, key));
-
-
+        System.out.println(deEncrypt(str, key));
+        System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
 
 
     }

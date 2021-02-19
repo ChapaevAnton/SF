@@ -5,9 +5,6 @@ public final class Encryption {
     public final static int XOR_ENCRYPT = 1;
     public final static int ATBASH_ENCRYPT = 2;
 
-    private final static int CODING_ALGORITHM_MODE = 1;
-    private final static int DECODING_ALGORITHM_MODE = 2;
-
     public static String encrypt(String text, String encryptKey) {
 
         return xorEncrypting(text, encryptKey);
@@ -22,7 +19,7 @@ public final class Encryption {
 
         String newText = switch (typeCryptMethod) {
             case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
-            case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey, CODING_ALGORITHM_MODE);
+            case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
             default -> text;
         };
 
@@ -33,7 +30,7 @@ public final class Encryption {
     public static String deEncrypt(String text, String encryptKey, int typeCryptMethod) {
         String newText = switch (typeCryptMethod) {
             case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
-            case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey, DECODING_ALGORITHM_MODE);
+            case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
             default -> text;
         };
 
@@ -59,38 +56,35 @@ public final class Encryption {
 
 
     //TODO Разработать
-    //FIXME encryptKey - пока не учитывается
+    //FIXME encryptKey - пока не учитывается в atbashEncrypting, только передается в xorEncrypting
     //Алфавит шифрования
     private final static String ENCRYPT_ALPHABET =
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZ /*-+абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
     //Сложность алфавита шифрования
     private final static int COMPLEXITY = ENCRYPT_ALPHABET.length() - 1;
 
-    private static String atbashEncrypting(String text, String encryptKey, int algorithmMode) {
+    private static String atbashEncrypting(String text, String encryptKey) {
 
-        switch (algorithmMode) {
-            //если режим кодирования
-            case CODING_ALGORITHM_MODE -> {
-                char[] encodedArray = text.toCharArray();
-                for (int i = 0; i < encodedArray.length; i++) {
-                    int index = ENCRYPT_ALPHABET.indexOf(encodedArray[i]);
-                    //отсутсвует шифрующий символ в алфавите
-                    if (index != -1) {
-                        index = COMPLEXITY - index;
-                        encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
-                    } else {
-                        //кодируем XOR если нет в алфавите
-                        encodedArray[i] = xorEncrypting(Character.toString(encodedArray[i]),encryptKey).charAt(0);
-                    }
-                }
-                text = String.valueOf(encodedArray);
-            }
+        char[] encodedArray = text.toCharArray();
 
-            case DECODING_ALGORITHM_MODE -> {
-                //FIXME - доделать
+
+        for (int i = 0; i < encodedArray.length; i++) {
+            int index = ENCRYPT_ALPHABET.indexOf(encodedArray[i]);
+            //отсутсвует шифрующий символ в алфавите
+            if (index != -1) {
+                index = COMPLEXITY - index;
+                encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
+            } else {
+                //кодируем XOR если нет в алфавите
+                encodedArray[i] = xorEncrypting(Character.toString(encodedArray[i]), encryptKey).charAt(0);
             }
         }
+        text = String.valueOf(encodedArray);
+
         return text;
+
     }
 
 }
+
+
