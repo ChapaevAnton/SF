@@ -27,7 +27,7 @@ public final class Encryption {
         for (byte item : keys) {
             key += Byte.toUnsignedInt(item);
         }
-        System.out.println(key);
+
         for (char item : texts) {
             text = text.replace(item, (char) (item ^ key));
         }
