@@ -1,6 +1,7 @@
-package deshifrator;
+import deshifrator.Encryption;
 
 import java.util.Scanner;
+import static deshifrator.Encryption.*;
 
 public class Main {
 
@@ -15,22 +16,6 @@ public class Main {
         andrew = encrypt(andrew, key);
         System.out.println(deEncrypt(andrew, key));
 
-    }
 
-    public static String encrypt(String text, int key) {
-        return workIt(text, key);
-    }
-
-    public static String deEncrypt(String text, int key) {
-        return workIt(text, key);
-    }
-
-    private static String workIt(String text, int key) {
-        char[] texts = text.toCharArray();
-        for (int i = 0; i < text.length(); i++) {
-            int encrypt = texts[i];
-            text = text.replace(texts[i], (char) (encrypt ^ key));
-        }
-        return text;
     }
 }
