@@ -79,7 +79,8 @@ public final class Encryption {
                         index = COMPLEXITY - index;
                         encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
                     } else {
-                        encodedArray[i] = '*';
+                        //кодируем XOR если нет в алфавите
+                        encodedArray[i] = xorEncrypting(Character.toString(encodedArray[i]),encryptKey).charAt(0);
                     }
                 }
                 text = String.valueOf(encodedArray);
