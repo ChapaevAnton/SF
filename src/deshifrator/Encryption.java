@@ -15,23 +15,22 @@ public final class Encryption {
     }
 
     //TODO обработать null, и неправильный ввод ключа
-    public static String encrypt(String text, String encryptKey, int typeCryptMethod) {
+    public static EncryptedString encrypt(String text, String encryptKey, int typeCryptMethod) {
 
-        return selectTypeCrypt(text, encryptKey, typeCryptMethod);
-    }
+        EncryptedString encryptedString = EncryptedString.getEncryptString(text, typeCryptMethod);
 
-    public static EncryptedString encrypt(EncryptedString text, String encryptKey, int typeCryptMethod) {
-        if (!text.isEncrypted()) {
-            text.setStr(selectTypeCrypt(text.toString(), encryptKey, typeCryptMethod));
-            text.setTypeCryptMethod(typeCryptMethod);
-            text.setEncrypted(true);
-            return text;
+        if (!encryptedString.isEncrypted()) {
+            encryptedString.setStr(selectTypeCrypt(encryptedString.toString(), encryptKey, typeCryptMethod));
+            encryptedString.setEncrypted(true);
+            encryptedString.setEncryptedDate();
         } else {
-            text.getStrInfo();
-            return text;
+            encryptedString.getStrInfo();
         }
+
+        return encryptedString;
     }
 
+    //TODO Доработать, выдавать ошибку если метод дешифровки не совпадает, если текст не шифрован
     public static String deEncrypt(String text, String encryptKey, int typeCryptMethod) {
         return selectTypeCrypt(text, encryptKey, typeCryptMethod);
     }

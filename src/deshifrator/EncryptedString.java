@@ -1,5 +1,5 @@
 //TODO Задумка в том что бы шифруемая строка балы объектом,
-// и можно было понять зашифрована данная строка или нет, и каким алгоритмом
+// и можно было понять зашифрована данная строка или нет, и каким алгоритмом, а когда была зашифрована
 package deshifrator;
 
 import java.time.LocalDateTime;
@@ -12,17 +12,21 @@ public final class EncryptedString {
     private boolean encrypted;
     private LocalDateTime encryptedDate;
 
-    private EncryptedString(String str) {
+    private EncryptedString(String str, int typeCryptMethod) {
         this.str = str;
-        typeCryptMethod = 0;
-        encrypted = false;
-        encryptedDate = LocalDateTime.now();
+        this.typeCryptMethod = typeCryptMethod;
+        this.encrypted = false;
+    }
+
+    static EncryptedString getEncryptString(String str, int typeCryptMethod) {
+        return new EncryptedString(str, typeCryptMethod);
     }
 
     public static EncryptedString getEncryptString(String str) {
-        return new EncryptedString(str);
+        return new EncryptedString(str, 0);
     }
 
+    @Override
     public String toString() {
         return str;
     }
@@ -30,22 +34,23 @@ public final class EncryptedString {
     public void getStrInfo() {
         System.out.println(typeCryptMethod);
         System.out.println(encrypted);
-        System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
+        if (encryptedDate != null)
+            System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
     }
 
-    public void setStr(String str) {
+    void setStr(String str) {
         this.str = str;
     }
 
-    public void setTypeCryptMethod(int typeCryptMethod) {
-        this.typeCryptMethod = typeCryptMethod;
-    }
-
-    public void setEncrypted(boolean encrypted) {
+    void setEncrypted(boolean encrypted) {
         this.encrypted = encrypted;
     }
 
-    public boolean isEncrypted() {
+    void setEncryptedDate() {
+        encryptedDate = LocalDateTime.now();
+    }
+
+    boolean isEncrypted() {
         return encrypted;
     }
 
