@@ -1,3 +1,5 @@
+import deshifrator.EncryptedString;
+
 import java.util.Scanner;
 
 import static deshifrator.Encryption.*;
@@ -20,6 +22,11 @@ public class Main {
 
         System.out.println(deEncrypt(str, key));
         System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
+
+        EncryptedString string = EncryptedString.getEncryptString(andrew);
+        string.getStrInfo();
+        System.out.println(encrypt(string, key, ATBASH_ENCRYPT));
+        string.getStrInfo();
 
 
     }

@@ -14,20 +14,30 @@ public final class Encryption {
         return xorEncrypting(text, encryptKey);
     }
 
-    //обработать null, и неправильный ввод ключа лялялля
+    //TODO обработать null, и неправильный ввод ключа
     public static String encrypt(String text, String encryptKey, int typeCryptMethod) {
 
-        String newText = switch (typeCryptMethod) {
-            case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
-            case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
-            default -> text;
-        };
-
-        return newText;
+        return selectTypeCrypt(text, encryptKey, typeCryptMethod);
     }
 
+    public static EncryptedString encrypt(EncryptedString text, String encryptKey, int typeCryptMethod) {
+        if (!text.isEncrypted()) {
+            text.setStr(selectTypeCrypt(text.toString(), encryptKey, typeCryptMethod));
+            text.setTypeCryptMethod(typeCryptMethod);
+            text.setEncrypted(true);
+            return text;
+        } else {
+            text.getStrInfo();
+            return text;
+        }
+    }
 
     public static String deEncrypt(String text, String encryptKey, int typeCryptMethod) {
+        return selectTypeCrypt(text, encryptKey, typeCryptMethod);
+    }
+
+
+    private static String selectTypeCrypt(String text, String encryptKey, int typeCryptMethod) {
         String newText = switch (typeCryptMethod) {
             case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
             case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
@@ -36,7 +46,6 @@ public final class Encryption {
 
         return newText;
     }
-
 
     private static String xorEncrypting(String text, String encryptKey) {
         char[] texts = text.toCharArray();
