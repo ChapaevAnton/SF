@@ -1,4 +1,6 @@
-//FIXME Пронаследовать от EncryptedString имплементировать методы.
+//FIXME Пронаследовать от EncryptedString имплементировать методы
+//FIXME Рефакторинг в XoRString
+
 package deshifrator;
 
 public final class Encryption {

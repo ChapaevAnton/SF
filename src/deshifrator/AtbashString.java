@@ -2,22 +2,25 @@ package deshifrator;
 
 public final class AtbashString extends EncryptedString {
 
+    //конструктор
     private AtbashString(String str) {
         super(str, ATBASH_ENCRYPT, false);
     }
 
+    //метод создание новой строки
     public static EncryptedString getEncryptString(String str) {
         return new AtbashString(str);
     }
 
     //FIXME encryptKey - пока не учитывается в atbashEncrypting, только передается в xorEncrypting
     //FIXME не шифрует символы которые отсуствуют в алфавите, просто заменяет их *
-    //Алфавит шифрования
+    //алфавит шифрования
     private final static String ENCRYPT_ALPHABET =
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZ /*-+абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
-    //Сложность алфавита шифрования
+    //сложность алфавита шифрования
     private final static int COMPLEXITY = ENCRYPT_ALPHABET.length() - 1;
 
+    //алгоритм шифрования
     @Override
     String encryptionAlgorithm(String text, String encryptKey) {
 
@@ -39,11 +42,13 @@ public final class AtbashString extends EncryptedString {
         return text;
     }
 
+    //алгоритм дешифровки
     @Override
     String decryptionAlgorithm(String text, String encryptKey) {
         return encryptionAlgorithm(text, encryptKey);
     }
 
+    //шифрование
     @Override
     public EncryptedString encrypt(String encryptKey) {
 
@@ -56,6 +61,7 @@ public final class AtbashString extends EncryptedString {
         return this;
     }
 
+    //дешифровка
     @Override
     public EncryptedString deEncrypt(String encryptKey) {
 
