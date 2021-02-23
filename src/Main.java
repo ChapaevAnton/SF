@@ -15,13 +15,10 @@ public class Main {
 
         EncryptedString strCrypt = AtbashString.getEncryptString(andrew);
         strCrypt.getStrInfo();
-        System.out.println(strCrypt.encrypt(strCrypt, key));
 
-        String str = strCrypt.toString();
-        System.out.println(str);
+        System.out.println(strCrypt.encrypt(key));
 
-        System.out.println(strCrypt.deEncrypt(strCrypt, key));
-
+        System.out.println(strCrypt.deEncrypt(key));
 
 
     }

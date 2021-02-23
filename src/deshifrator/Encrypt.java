@@ -2,8 +2,8 @@ package deshifrator;
 
 public interface Encrypt {
 
-    EncryptedString encrypt(EncryptedString text, String encryptKey);
+    EncryptedString encrypt(String encryptKey);
 
-    EncryptedString deEncrypt(EncryptedString text, String encryptKey);
+    EncryptedString deEncrypt(String encryptKey);
 
 }

@@ -1,6 +1,6 @@
 package deshifrator;
 
-public final class AtbashString extends EncryptedString implements Encrypt {
+public final class AtbashString extends EncryptedString {
 
     private AtbashString(String str) {
         super(str, ATBASH_ENCRYPT, false);
@@ -45,26 +45,26 @@ public final class AtbashString extends EncryptedString implements Encrypt {
     }
 
     @Override
-    public EncryptedString encrypt(EncryptedString text, String encryptKey) {
+    public EncryptedString encrypt(String encryptKey) {
 
         if (!isEncrypted()) {
-            setStr(encryptionAlgorithm(text.toString(), encryptKey));
+            setStr(encryptionAlgorithm(toString(), encryptKey));
             setEncrypted(true);
             setEncryptedDate();
             getStrInfo();
-        }
-        return text;
+        } else System.out.println("Attention. This string is already encrypted.");
+        return this;
     }
 
     @Override
-    public EncryptedString deEncrypt(EncryptedString text, String encryptKey) {
+    public EncryptedString deEncrypt(String encryptKey) {
 
         if (isEncrypted()) {
-            setStr(decryptionAlgorithm(text.toString(), encryptKey));
+            setStr(decryptionAlgorithm(toString(), encryptKey));
             setEncrypted(false);
             setEncryptedDate();
             getStrInfo();
-        }
-        return text;
+        } else System.out.println("Attention. This string has already been decrypted.");
+        return this;
     }
 }

@@ -1,3 +1,4 @@
+//FIXME Пронаследовать от EncryptedString имплементировать методы.
 package deshifrator;
 
 public final class Encryption {
