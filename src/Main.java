@@ -1,8 +1,7 @@
+import deshifrator.AtbashString;
 import deshifrator.EncryptedString;
 
 import java.util.Scanner;
-
-import static deshifrator.Encryption.*;
 
 public class Main {
 
@@ -14,26 +13,15 @@ public class Main {
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
 
-        String str = encrypt(andrew, key);
-        String str1 = encrypt(andrew, key, ATBASH_ENCRYPT).toString();
+        EncryptedString strCrypt = AtbashString.getEncryptString(andrew);
+        strCrypt.getStrInfo();
+        System.out.println(strCrypt.encrypt(strCrypt, key));
 
-        System.out.println("XOR: " + str);
-        System.out.println("ATBASH: " + str1);
+        String str = strCrypt.toString();
+        System.out.println(str);
 
-        System.out.println(deEncrypt(str, key));
-        System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
+        System.out.println(strCrypt.deEncrypt(strCrypt, key));
 
-        EncryptedString strEncrypt = encrypt(andrew, key, ATBASH_ENCRYPT);
-
-        System.out.println(strEncrypt);
-        strEncrypt.getStrInfo();
-
-        EncryptedString strEncrypt1 = EncryptedString.getEncryptString(andrew);
-        System.out.println(strEncrypt1);
-        strEncrypt1.getStrInfo();
-
-        String str2 = strEncrypt1.toString();
-        System.out.println(str2);
 
 
     }

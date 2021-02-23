@@ -1,30 +1,29 @@
-//TODO Задумка в том что бы шифруемая строка балы объектом,
-// и можно было понять зашифрована данная строка или нет, и каким алгоритмом, а когда была зашифрована
 package deshifrator;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public final class EncryptedString {
+public abstract class EncryptedString implements Encrypt{
+
+    final static int NOT_ENCRYPT = 0;
+    final static int XOR_ENCRYPT = 1;
+    final static int ATBASH_ENCRYPT = 2;
 
     private String str;
     private int typeCryptMethod;
     private boolean encrypted;
     private LocalDateTime encryptedDate;
 
-    private EncryptedString(String str, int typeCryptMethod) {
+    EncryptedString(String str, int typeCryptMethod, boolean encrypted) {
         this.str = str;
         this.typeCryptMethod = typeCryptMethod;
-        this.encrypted = false;
+        this.encrypted = encrypted;
+        this.encryptedDate = LocalDateTime.now();
     }
 
-    static EncryptedString getEncryptString(String str, int typeCryptMethod) {
-        return new EncryptedString(str, typeCryptMethod);
-    }
+    abstract String encryptionAlgorithm(String text, String encryptKey);
 
-    public static EncryptedString getEncryptString(String str) {
-        return new EncryptedString(str, 0);
-    }
+    abstract String decryptionAlgorithm(String text, String encryptKey);
 
     @Override
     public String toString() {
