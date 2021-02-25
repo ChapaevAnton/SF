@@ -49,7 +49,7 @@ public abstract class EncryptedString implements EncryptKey {
     //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
     // может быть актуально только для atbash и XOR
     //старт шифрования
-    EncryptedString encryptStart(String encryptKey) {
+    EncryptedString encryptString(String encryptKey) {
 
         if (!encrypted) {
             str = encryptionAlgorithm(str, encryptKey);
@@ -65,7 +65,7 @@ public abstract class EncryptedString implements EncryptKey {
     //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
     // может быть актуально только для atbash и XOR
     //старт дешифровки
-    EncryptedString deEncryptStart(String encryptKey) {
+    EncryptedString deEncryptString(String encryptKey) {
 
         if (encrypted) {
             str = decryptionAlgorithm(str, encryptKey);

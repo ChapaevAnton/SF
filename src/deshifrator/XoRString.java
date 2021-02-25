@@ -16,12 +16,12 @@ public final class XoRString extends EncryptedString {
 
     @Override
     public EncryptedString encrypt(String encryptKey) {
-        return encryptStart(encryptKey);
+        return encryptString(encryptKey);
     }
 
     @Override
     public EncryptedString deEncrypt(String encryptKey) {
-        return deEncryptStart(encryptKey);
+        return deEncryptString(encryptKey);
     }
 
     @Override

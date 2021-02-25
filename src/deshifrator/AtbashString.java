@@ -56,13 +56,13 @@ public final class AtbashString extends EncryptedString {
     @Override
     public EncryptedString encrypt(String encryptKey) {
 
-        return encryptStart(encryptKey);
+        return encryptString(encryptKey);
     }
 
     //дешифровка
     @Override
     public EncryptedString deEncrypt(String encryptKey) {
 
-        return deEncryptStart(encryptKey);
+        return deEncryptString(encryptKey);
     }
 }
