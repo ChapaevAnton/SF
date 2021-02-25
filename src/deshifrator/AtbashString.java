@@ -53,7 +53,4 @@ public final class AtbashString extends EncryptedString {
         return encryptionAlgorithm(text, encryptKey);
     }
 
-
-
-
 }

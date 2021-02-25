@@ -103,5 +103,4 @@ public abstract class EncryptedString implements EncryptKey {
         return encrypted;
     }
 
-
 }
