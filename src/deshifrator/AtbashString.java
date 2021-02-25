@@ -56,8 +56,10 @@ public final class AtbashString extends EncryptedString {
             setStr(encryptionAlgorithm(toString(), encryptKey));
             setEncrypted(true);
             setEncryptedDate();
+        } else {
+            System.out.println("Attention. This string is already encrypted.");
             getStrInfo();
-        } else System.out.println("Attention. This string is already encrypted.");
+        }
         return this;
     }
 
@@ -69,8 +71,10 @@ public final class AtbashString extends EncryptedString {
             setStr(decryptionAlgorithm(toString(), encryptKey));
             setEncrypted(false);
             setEncryptedDate();
+        } else {
+            System.out.println("Attention. This string has already been decrypted.");
             getStrInfo();
-        } else System.out.println("Attention. This string has already been decrypted.");
+        }
         return this;
     }
 }

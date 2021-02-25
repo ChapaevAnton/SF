@@ -15,6 +15,7 @@ public class Main {
         String key = scanner.nextLine();
 
         EncryptedString strCrypt = AtbashString.getEncryptString(andrew);
+
         strCrypt.getStrInfo();
 
         System.out.println(strCrypt.encrypt(key));

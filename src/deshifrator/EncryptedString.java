@@ -5,17 +5,17 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class EncryptedString implements EncryptKey {
     //типы шифрования
-    final static int NOT_ENCRYPT = 0;
-    final static int XOR_ENCRYPT = 1;
-    final static int ATBASH_ENCRYPT = 2;
+    final static String NOT_ENCRYPT = "NOT_ENCRYPT";
+    final static String XOR_ENCRYPT = "XOR_ENCRYPT";
+    final static String ATBASH_ENCRYPT = "ATBASH_ENCRYPT";
 
     private String str; //текст
-    private int typeCryptMethod; //методо шифрования
+    private String typeCryptMethod; //методо шифрования
     private boolean encrypted; //статус шифрования
     private LocalDateTime encryptedDate; //время последнего изменения
 
     //конструктор
-    EncryptedString(String str, int typeCryptMethod, boolean encrypted) {
+    EncryptedString(String str, String typeCryptMethod, boolean encrypted) {
         this.str = str;
         this.typeCryptMethod = typeCryptMethod;
         this.encrypted = encrypted;
