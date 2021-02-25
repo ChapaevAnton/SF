@@ -46,6 +46,8 @@ public abstract class EncryptedString implements EncryptKey {
         System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
     }
 
+    //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
+    // может быть актуально только для atbash и XOR
     //старт шифрования
     EncryptedString encryptStart(String encryptKey) {
 
@@ -60,6 +62,8 @@ public abstract class EncryptedString implements EncryptKey {
         return this;
     }
 
+    //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
+    // может быть актуально только для atbash и XOR
     //старт дешифровки
     EncryptedString deEncryptStart(String encryptKey) {
 
