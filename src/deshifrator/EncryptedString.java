@@ -33,24 +33,13 @@ public abstract class EncryptedString implements EncryptKey {
     //алгоритм дешифровки
     abstract String decryptionAlgorithm(String text, String encryptKey);
 
-    //в строку
+
+    //TODO Имплементируется в базовом класса, но возможно придется переопределять в производных классах...
+    //шифрование
     @Override
-    public String toString() {
-        return str;
-    }
-
-    //информация о строке
-    public void getStrInfo() {
-        System.out.println(typeCryptMethod);
-        System.out.println(encrypted);
-        System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
-    }
-
-    //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
-    // может быть актуально только для atbash и XOR
-    //старт шифрования
-    EncryptedString encryptString(String encryptKey) {
-
+    public EncryptedString encrypt(String encryptKey) {
+        //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
+        // может быть актуально только для atbash и XOR, но как бы кто мешает переопределить
         if (!encrypted) {
             str = encryptionAlgorithm(str, encryptKey);
             encrypted = true;
@@ -62,11 +51,11 @@ public abstract class EncryptedString implements EncryptKey {
         return this;
     }
 
-    //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
-    // может быть актуально только для atbash и XOR
-    //старт дешифровки
-    EncryptedString deEncryptString(String encryptKey) {
-
+    //дешифровка
+    @Override
+    public EncryptedString deEncrypt(String encryptKey) {
+        //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
+        // может быть актуально только для atbash и XOR, но как бы кто мешает переопределить
         if (encrypted) {
             str = decryptionAlgorithm(str, encryptKey);
             encrypted = false;
@@ -76,6 +65,19 @@ public abstract class EncryptedString implements EncryptKey {
             getStrInfo();
         }
         return this;
+    }
+
+    //в строку
+    @Override
+    public String toString() {
+        return str;
+    }
+
+    //информация о строке
+    public void getStrInfo() {
+        System.out.println(typeCryptMethod);
+        System.out.println(encrypted);
+        System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
     }
 
     //TODO Служебные методы, может пригодятся, хотя можно напрямую обращаться к полям.

@@ -1,4 +1,5 @@
 package deshifrator;
+
 /**
  * Класс шифрования алгоритм Atbash
  * @author https://github.com/ChapaevAnton
@@ -52,17 +53,7 @@ public final class AtbashString extends EncryptedString {
         return encryptionAlgorithm(text, encryptKey);
     }
 
-    //шифрование
-    @Override
-    public EncryptedString encrypt(String encryptKey) {
 
-        return encryptString(encryptKey);
-    }
 
-    //дешифровка
-    @Override
-    public EncryptedString deEncrypt(String encryptKey) {
 
-        return deEncryptString(encryptKey);
-    }
 }
