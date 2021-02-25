@@ -1,4 +1,8 @@
 package deshifrator;
+/**
+ * Класс шифрования алгоритм Atbash
+ * @author https://github.com/ChapaevAnton
+ */
 
 public final class AtbashString extends EncryptedString {
 
@@ -52,29 +56,13 @@ public final class AtbashString extends EncryptedString {
     @Override
     public EncryptedString encrypt(String encryptKey) {
 
-        if (!isEncrypted()) {
-            setStr(encryptionAlgorithm(toString(), encryptKey));
-            setEncrypted(true);
-            setEncryptedDate();
-        } else {
-            System.out.println("Attention. This string is already encrypted.");
-            getStrInfo();
-        }
-        return this;
+        return encryptStart(encryptKey);
     }
 
     //дешифровка
     @Override
     public EncryptedString deEncrypt(String encryptKey) {
 
-        if (isEncrypted()) {
-            setStr(decryptionAlgorithm(toString(), encryptKey));
-            setEncrypted(false);
-            setEncryptedDate();
-        } else {
-            System.out.println("Attention. This string has already been decrypted.");
-            getStrInfo();
-        }
-        return this;
+        return deEncryptStart(encryptKey);
     }
 }

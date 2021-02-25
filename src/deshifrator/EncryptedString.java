@@ -3,6 +3,11 @@ package deshifrator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Абстрактный класс шифрования, строка - содержит параметры шифрования.
+ * @author https://github.com/ChapaevAnton
+ */
+
 public abstract class EncryptedString implements EncryptKey {
     //типы шифрования
     final static String NOT_ENCRYPT = "NOT_ENCRYPT";
@@ -24,10 +29,10 @@ public abstract class EncryptedString implements EncryptKey {
 
     //алгоритм шифровки
     abstract String encryptionAlgorithm(String text, String encryptKey);
+
     //алгоритм дешифровки
     abstract String decryptionAlgorithm(String text, String encryptKey);
 
-    //TODO Служебные методы
     //в строку
     @Override
     public String toString() {
@@ -38,27 +43,57 @@ public abstract class EncryptedString implements EncryptKey {
     public void getStrInfo() {
         System.out.println(typeCryptMethod);
         System.out.println(encrypted);
-        if (encryptedDate != null)
-            System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
+        System.out.println(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss").format(encryptedDate));
     }
 
+    //старт шифрования
+    EncryptedString encryptStart(String encryptKey) {
+
+        if (!encrypted) {
+            str = encryptionAlgorithm(str, encryptKey);
+            encrypted = true;
+            encryptedDate = LocalDateTime.now();
+        } else {
+            System.out.println("Attention. This string is already encrypted.");
+            getStrInfo();
+        }
+        return this;
+    }
+
+    //старт дешифровки
+    EncryptedString deEncryptStart(String encryptKey) {
+
+        if (encrypted) {
+            str = decryptionAlgorithm(str, encryptKey);
+            encrypted = false;
+            encryptedDate = LocalDateTime.now();
+        } else {
+            System.out.println("Attention. This string has already been decrypted.");
+            getStrInfo();
+        }
+        return this;
+    }
+
+    //TODO Служебные методы, может пригодятся, хотя можно напрямую обращаться к полям.
+    // Пока не используются PRIVATE
+
     //установить значение строки
-    void setStr(String str) {
+    private void setStr(String str) {
         this.str = str;
     }
 
     //установить значение статуса шифрования
-    void setEncrypted(boolean encrypted) {
+    private void setEncrypted(boolean encrypted) {
         this.encrypted = encrypted;
     }
 
     //установить значение время последнего изменения
-    void setEncryptedDate() {
+    private void setEncryptedDate() {
         encryptedDate = LocalDateTime.now();
     }
 
     //запрос статус шифрования
-    boolean isEncrypted() {
+    private boolean isEncrypted() {
         return encrypted;
     }
 
