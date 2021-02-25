@@ -7,6 +7,7 @@ import static deshifrator.Encryption.*;
 public class Main {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Шифрователь текса.");
         System.out.print("Введите текст: ");
