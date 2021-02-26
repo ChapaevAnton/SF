@@ -2,19 +2,15 @@ package deshifrator;
 
 /**
  * Класс шифрования алгоритм Atbash
+ *
  * @author https://github.com/ChapaevAnton
  */
 
-public final class AtbashString extends EncryptedString {
+final class AtbashString extends EncryptString {
 
     //конструктор
-    private AtbashString(String str) {
+    AtbashString(String str) {
         super(str, ATBASH_ENCRYPT, false);
-    }
-
-    //метод создание новой строки
-    public static EncryptedString getEncryptString(String str) {
-        return new AtbashString(str);
     }
 
     //FIXME encryptKey - пока не учитывается в atbashEncrypting, только передается в xorEncrypting

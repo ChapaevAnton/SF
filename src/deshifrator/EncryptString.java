@@ -5,10 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Абстрактный класс шифрования, строка - содержит параметры шифрования.
+ *
  * @author https://github.com/ChapaevAnton
  */
 
-public abstract class EncryptedString implements EncryptKey {
+abstract class EncryptString implements EncryptingString {
     //типы шифрования
     final static String NOT_ENCRYPT = "NOT_ENCRYPT";
     final static String XOR_ENCRYPT = "XOR_ENCRYPT";
@@ -20,7 +21,7 @@ public abstract class EncryptedString implements EncryptKey {
     private LocalDateTime encryptedDate; //время последнего изменения
 
     //конструктор
-    EncryptedString(String str, String typeCryptMethod, boolean encrypted) {
+    EncryptString(String str, String typeCryptMethod, boolean encrypted) {
         this.str = str;
         this.typeCryptMethod = typeCryptMethod;
         this.encrypted = encrypted;
@@ -37,7 +38,7 @@ public abstract class EncryptedString implements EncryptKey {
     //TODO Имплементируется в базовом класса, но возможно придется переопределять в производных классах...
     //шифрование
     @Override
-    public EncryptedString encrypt(String encryptKey) {
+    public EncryptString encrypt(String encryptKey) {
         //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
         // может быть актуально только для atbash и XOR, но как бы кто мешает переопределить
         if (!encrypted) {
@@ -53,7 +54,7 @@ public abstract class EncryptedString implements EncryptKey {
 
     //дешифровка
     @Override
-    public EncryptedString deEncrypt(String encryptKey) {
+    public EncryptString deEncrypt(String encryptKey) {
         //TODO Возможно это не совсем универсальное решение чтобы его наследовать в другие классы
         // может быть актуально только для atbash и XOR, но как бы кто мешает переопределить
         if (encrypted) {
@@ -74,6 +75,7 @@ public abstract class EncryptedString implements EncryptKey {
     }
 
     //информация о строке
+    @Override
     public void getStrInfo() {
         System.out.println(typeCryptMethod);
         System.out.println(encrypted);

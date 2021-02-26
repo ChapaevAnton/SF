@@ -2,18 +2,14 @@ package deshifrator;
 
 /**
  * Класс шифрования алгоритм XOR
+ *
  * @author https://github.com/Quertte
  */
 
-public final class XoRString extends EncryptedString {
+final class XoRString extends EncryptString {
 
-    private XoRString(String str) {
+    XoRString(String str) {
         super(str, XOR_ENCRYPT, false);
-    }
-
-    //метод создание новой строки
-    public static EncryptedString getEncryptString(String str) {
-        return new XoRString(str);
     }
 
     @Override
