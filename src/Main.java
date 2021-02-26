@@ -1,6 +1,6 @@
-import deshifrator.AtbashString;
-import deshifrator.EncryptedString;
-import deshifrator.XoRString;
+import deshifrator.CreatingString;
+import deshifrator.CreatorString;
+import deshifrator.EncryptingString;
 
 import java.util.Scanner;
 
@@ -15,7 +15,9 @@ public class Main {
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
 
-        EncryptedString strCrypt = AtbashString.getEncryptString(andrew);
+
+
+        EncryptingString strCrypt = CreatorString.atbashString.toCreate(andrew);
         strCrypt.getStrInfo();
         System.out.println(strCrypt.encrypt(key));
         System.out.println(strCrypt.deEncrypt(key));
@@ -23,7 +25,7 @@ public class Main {
         System.out.println(str);
 
 
-        strCrypt = XoRString.getEncryptString(andrew);
+        strCrypt = CreatorString.XoRString.toCreate(andrew);
         strCrypt.getStrInfo();
         System.out.println(strCrypt.encrypt(key));
         System.out.println(strCrypt.deEncrypt(key));
