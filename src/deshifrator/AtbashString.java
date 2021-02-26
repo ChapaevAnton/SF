@@ -8,13 +8,15 @@ package deshifrator;
 
 final class AtbashString extends EncryptString {
 
+    //типы шифрования
+    final static String ATBASH_ENCRYPT = "ATBASH_ENCRYPT";
+
     //конструктор
     AtbashString(String str) {
         super(str, ATBASH_ENCRYPT, false);
     }
 
     //FIXME encryptKey - пока не учитывается в atbashEncrypting, только передается в xorEncrypting
-    //FIXME не шифрует символы которые отсуствуют в алфавите, просто заменяет их *
     //алфавит шифрования
     private final static String ENCRYPT_ALPHABET =
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZ /*-+абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
@@ -35,7 +37,7 @@ final class AtbashString extends EncryptString {
                 encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
             } else {
                 //кодируем XOR если нет в алфавите
-                encodedArray[i] = '*';
+                encodedArray[i] = new XoRString(Character.toString(encodedArray[i])).encrypt(encryptKey).toString().charAt(0);
             }
         }
         text = String.valueOf(encodedArray);
