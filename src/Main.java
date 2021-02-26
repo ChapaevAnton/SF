@@ -1,10 +1,12 @@
-import java.util.Scanner;
+import deshifrator.CreatingString;
+import deshifrator.EncryptingString;
 
-import static deshifrator.Encryption.*;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Шифрователь текса.");
         System.out.print("Введите текст: ");
@@ -12,15 +14,19 @@ public class Main {
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
 
-        String str = encrypt(andrew, key);
-        String str1 = encrypt(andrew, key, ATBASH_ENCRYPT);
+        EncryptingString strCrypt = CreatingString.atbashString.toCreate(andrew);
+        strCrypt.getStrInfo();
+        System.out.println(strCrypt.encrypt(key));
+        System.out.println(strCrypt.deEncrypt(key));
+        String str = strCrypt.toString();
+        System.out.println(str);
 
-        System.out.println("XOR: "+str);
-        System.out.println("ATBASH: "+str1);
-
-        System.out.println(deEncrypt(str, key));
-        System.out.println(deEncrypt(str1, key, ATBASH_ENCRYPT));
-
+        strCrypt = CreatingString.XoRString.toCreate(andrew);
+        strCrypt.getStrInfo();
+        System.out.println(strCrypt.encrypt(key));
+        System.out.println(strCrypt.deEncrypt(key));
+        str = strCrypt.toString();
+        System.out.println(str);
 
     }
 }
