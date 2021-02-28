@@ -1,9 +1,11 @@
 package deshifrator;
 
+
 public final class Encryption {
 
     public final static int XOR_ENCRYPT = 1;
     public final static int ATBASH_ENCRYPT = 2;
+    public final static int ENIGMA_ENCRYPT = 3;
 
     public static String encrypt(String text, String encryptKey) {
 
@@ -20,6 +22,7 @@ public final class Encryption {
         String newText = switch (typeCryptMethod) {
             case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
             case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
+            case ENIGMA_ENCRYPT -> enigmaEncrypting(text, encryptKey);
             default -> text;
         };
 
@@ -31,6 +34,7 @@ public final class Encryption {
         String newText = switch (typeCryptMethod) {
             case XOR_ENCRYPT -> xorEncrypting(text, encryptKey);
             case ATBASH_ENCRYPT -> atbashEncrypting(text, encryptKey);
+            case ENIGMA_ENCRYPT -> enigmaEncrypting(text, encryptKey);
             default -> text;
         };
 
@@ -83,6 +87,12 @@ public final class Encryption {
 
         return text;
 
+    }
+
+    private static String enigmaEncrypting(String text, String encryptKey) {
+
+        Enigma enigma = new Enigma();
+        return enigma.encryptMessage(text, encryptKey);
     }
 
 }
