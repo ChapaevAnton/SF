@@ -24,7 +24,7 @@ public class Main {
         System.out.println();
         System.out.println("XOR: " + str);
         System.out.println("ATBASH: " + str1);
-        System.out.println("ENIGMA M3: " + str2);
+        System.out.println("ENIGMA M3 (expanded): " + str2);
 
         System.out.println("=========================");
 
@@ -32,7 +32,7 @@ public class Main {
         System.out.println();
         System.out.println("XOR: " + deEncrypt(str, key));
         System.out.println("ATBASH: " + deEncrypt(str1, key, ATBASH_ENCRYPT));
-        System.out.println("ENIGMA M3: " + deEncrypt(str2, key, ENIGMA_ENCRYPT));
+        System.out.println("ENIGMA M3 (expanded): " + deEncrypt(str2, key, ENIGMA_ENCRYPT));
 
 
 
