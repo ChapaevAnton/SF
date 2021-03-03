@@ -31,7 +31,7 @@ public class Enigma implements MessageEncryptable {
     @Override
 
     public  String encryptMessage(String message, String secretKey) {
-//        this.setKey(secretKey);
+        this.setKey(secretKey);
         return crypt(message);
     }
 
