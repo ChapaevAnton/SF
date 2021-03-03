@@ -1,15 +1,15 @@
 package deshifrator;
 
 public class Enigma implements MessageEncryptable {
-    private static final String alpha = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~«»АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя";//Шифруемый алфавит
+    private static final String alpha = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~«»АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя–";//Шифруемый алфавит
     private static final String rotors[] = //3 ротора Энигмы №№
             {//      Роторы - зарэндомленный алфавит (строка alpha)
-                    "Ф,р~U?а[(Аю0ЧтY«дмRОNб9Й*2QPфж5<я!jCщ&}4xT{vf`HДAчн\"пZеИ6С=a7tГЭ: ЮЩmq#rцх)DpЕв_ВKуc8Ыk-Ъ$SGшгFКgзnсТко]z/ыЯ>'лWП\\e^MУЬ.EйJЦiъd3ь1ЖЗVsl;ByЛOXБwIР+%МШbХ»|эи@oНLhu",//ротор I (LEFT)
-                    "С3ыт7йс5шs|~bиаiвАхE)оk8нrR6Ч&УL {*ю4^YяQЭ$?aфzhx@Дuд\"ITэlРVъ],п_pЗ'цГ#}КF:жnjJВЬg`ЛomОU+бг(ЪФNщt%yкМXBGЕDЯН-Шу;S>Пe0Т=wWрЫБЙvЖfЮзKdлO»</\\ЦPCHЩХ9«м!.cZИчMA[е12ьq",//ротор II (MIDDLE)
-                    "auНGnOТ\\щС/в_Г0гY3биз5[4ш\"ЩmК1ЭьжЕХ}Шч^«уЬ'$J-gлэ6tyнxАИц,ЮQОLHЯЙvУ# (йъX»d)P=РVDре|9;iKтlЫхNБ7wj.Л>FпЗаEы2Rp~?UBATc<bсrм!кдД+Ъ8%:ЦюоIЧяПeM@Фoh`Cф]{qSfЖВ*skМzWZ&"//ротор III (RIGHT)
+                    ",шУGШPVHKбI$ЧВ|6`a@?RA1тЛРБ>_bz7!й&ЮlZ}Ф9tЭ^{kиЖ=w*BТя8XЦ%НыэзyСщГnПоК3\\Nж5-А–]вO+iEлxMS2 ДОWs/vЕJМ0;хqfQсм.ЙгDд4gm[Uаь»~ю(фрц#чFуИе)ЯЗueпЫ'<:ЪjYTкнХЩr\"LhdCo«Ьpъc",//ротор I (LEFT)
+                    "OqСлжv;Yoе-N=ЫUЖЦЬ}В SgBRи#?@д4HУнiтщ<pхЛ:x!Йn7Т5QrйLV/КdцPЯcyElБМь–,абъГ02u{$шfZА\"ф(Пг.Е~Ф+WKОJ«*чmaыsкШI)ЮХпF1ДЭ9Ъ[T8b»Dя6XGу\\оЧMtН3`зjACЗ^ЩрИwс>Р|'ehэвмkz]%&ю_",//ротор II (MIDDLE)
+                    "J(мИ2Ц)[I.ГQис]Э/Ь!З5:Вo8NъPY^7j|#+t3s?eLкцНWЛЮ'Ч=чdGМhaБнMд}ДюЩ`бвqKт4py»Хф*УЖз@AiЫ%S-рщыА\"$6шь«TШREO\\fТКп1гFVBэ<_ЪrФzbауля,x>ЙZcхОе СжmkЯРXHПlv;&wй90UnЕ~gDо{u–C"//ротор III (RIGHT)
             };
-    private static final String reflector = "яюэьыъщшчцхфутсрпонмлкйизжедгвбаЯЮЭЬЫЪЩШЧЦХФУТСРПОНМЛКЙИЗЖЕДГВБА»«~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?>=<;:9876543210/.-,+*)('&%$#\"! ";//reflector -зазеркаленный алфавит (строка alpha)
-    private String key;
+    private static final String reflector = "–яюэьыъщшчцхфутсрпонмлкйизжедгвбаЯЮЭЬЫЪЩШЧЦХФУТСРПОНМЛКЙИЗЖЕДГВБА»«~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?>=<;:9876543210/.-,+*)('&%$#\"! ";//reflector -зазеркаленный алфавит (строка alpha)
+    private String key;//Строка хранит ключ, фактически для шифрования используются 3 знака из алфавита Энигмы.
 
     public Enigma() {//Конструктор по умолчанию - задается изначальная настройка роторов:
                                                                      /* ротор I   :'A'
@@ -30,9 +30,8 @@ public class Enigma implements MessageEncryptable {
 
     @Override
 
-    public String encryptMessage(String message, String secretKey) {
-//        deshifrator.Enigma newEncryption = new deshifrator.Enigma(secretKey);
-        this.setKey(secretKey);
+    public  String encryptMessage(String message, String secretKey) {
+//        this.setKey(secretKey);
         return crypt(message);
     }
 
@@ -44,7 +43,7 @@ public class Enigma implements MessageEncryptable {
 
     static int mod159(long a) {
 
-        return (int) ((a % 161 + 161) % 161);
+        return (int) ((a % 162 + 162) % 162);
     }
 
     static int li(char l) {//метод допилен с учетом разрывов в алфавите Enigma M3 (expanded)
@@ -52,6 +51,7 @@ public class Enigma implements MessageEncryptable {
         if (l < 150) return l - 32;
         else if (l == 171) return l - 76;
         else if (l == 187) return l - 91;
+        else if (l==8211) return l-8050;
         else return l - 943;
     }
 
@@ -66,7 +66,7 @@ public class Enigma implements MessageEncryptable {
         for (int i = 0; i < inString.length(); i++) {              // на каждой итерации добавлять символ в конец
             int ct_letter = li(inString.charAt(i));
 
-//Вращение ротов осталось как у оригинальной Энигмы (когда правый доходит до 'W' и средний - до 'F')
+//Вращение роторов осталось как у оригинальной Энигмы (когда правый доходит до 'W' и средний - до 'F')
             R = mod159(++R);//крутим правый ротор
             if (R == 55) M = mod159(++M);//крутим средний ротор, если правый дошел до 'W' (было: (R == 22))
             if (R == 55 && M == 38)

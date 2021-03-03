@@ -14,7 +14,7 @@ public class Main {
         System.out.print("Введите ключ: ");
         String key = scanner.nextLine();
 
-        String str = encrypt(andrew, key);
+        String str = encrypt(andrew, key, XOR_ENCRYPT);
         String str1 = encrypt(andrew, key, ATBASH_ENCRYPT);
         String str2 = encrypt(andrew, key, ENIGMA_ENCRYPT);
 
@@ -30,7 +30,7 @@ public class Main {
 
         System.out.println("ИСХОДНОЕ СООБЩЕНИЕ:");
         System.out.println();
-        System.out.println("XOR: " + deEncrypt(str, key));
+        System.out.println("XOR: " + deEncrypt(str, key,XOR_ENCRYPT));
         System.out.println("ATBASH: " + deEncrypt(str1, key, ATBASH_ENCRYPT));
         System.out.println("ENIGMA M3 (expanded): " + deEncrypt(str2, key, ENIGMA_ENCRYPT));
 
