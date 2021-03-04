@@ -17,6 +17,13 @@ final class EnigmaString extends EncryptString {
                     "J(мИ2Ц)[I.ГQис]Э/Ь!З5:Вo8NъPY^7j|#+t3s?eLкцНWЛЮ'Ч=чdGМhaБнMд}ДюЩ`бвqKт4py»Хф*УЖз@AiЫ%S-рщыА\"$6шь«TШREO\\fТКп1гFVBэ<_ЪrФzbауля,x>ЙZcхОе СжmkЯРXHПlv;&wй90UnЕ~gDо{u–C"//ротор III (RIGHT)
             };
     private static final String REFLECTOR = "–яюэьыъщшчцхфутсрпонмлкйизжедгвбаЯЮЭЬЫЪЩШЧЦХФУТСРПОНМЛКЙИЗЖЕДГВБА»«~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?>=<;:9876543210/.-,+*)('&%$#\"! ";//reflector -зазеркаленный алфавит (строка alpha)
+
+
+//OPTIMIZE 04.03.2021 Теперь этот блок ненужен
+// (конструктор по умолчанию если только, что бы задвать дефолтные настройки роторов - только смысл какой)
+// public String encryptMessage и public String decryptMessage заменены интерфейсом EncryptingString - который имплементирован
+// в базовом абстрактном классе EncryptString. interface MessageEncryptable - больше ненужен - по ка не удалял его...
+
 //    private String key;//Строка хранит ключ, фактически для шифрования используются 3 знака из алфавита Энигмы.
 
 //    public EnigmaString() {//Конструктор по умолчанию - задается изначальная настройка роторов:
