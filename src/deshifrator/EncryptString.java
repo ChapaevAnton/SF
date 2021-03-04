@@ -11,6 +11,11 @@ import java.time.format.DateTimeFormatter;
 
 abstract class EncryptString implements EncryptingString {
 
+    //алфавит шифрования
+    // TODO: 04.03.2021  
+    final static String ENCRYPT_ALPHABET =
+            " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~«»АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя–";
+    
     //типы шифрования
     final static String NOT_ENCRYPT = "NOT_ENCRYPT";
 

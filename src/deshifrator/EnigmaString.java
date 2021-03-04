@@ -1,7 +1,7 @@
 package deshifrator;
 
 /**
- * Класс шифрования алгоритм XOR
+ * Класс шифрования алгоритм ENIGMA
  *
  * @author https://github.com/Gurf
  */
@@ -15,8 +15,8 @@ final class EnigmaString extends EncryptString {
     }
 
     //Шифруемый алфавит
-    private static final String ALPHA = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~«»АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя–";
-    private static final String ROTORS[] = //3 ротора Энигмы №№
+    //3 ротора Энигмы
+    private static final String ROTORS[] =
             {//      Роторы - зарэндомленный алфавит (строка alpha)
                     ",шУGШPVHKбI$ЧВ|6`a@?RA1тЛРБ>_bz7!й&ЮlZ}Ф9tЭ^{kиЖ=w*BТя8XЦ%НыэзyСщГnПоК3\\Nж5-А–]вO+iEлxMS2 ДОWs/vЕJМ0;хqfQсм.ЙгDд4gm[Uаь»~ю(фрц#чFуИе)ЯЗueпЫ'<:ЪjYTкнХЩr\"LhdCo«Ьpъc",//ротор I (LEFT)
                     "OqСлжv;Yoе-N=ЫUЖЦЬ}В SgBRи#?@д4HУнiтщ<pхЛ:x!Йn7Т5QrйLV/КdцPЯcyElБМь–,абъГ02u{$шfZА\"ф(Пг.Е~Ф+WKОJ«*чmaыsкШI)ЮХпF1ДЭ9Ъ[T8b»Dя6XGу\\оЧMtН3`зjACЗ^ЩрИwс>Р|'ehэвмkz]%&ю_",//ротор II (MIDDLE)
@@ -94,9 +94,9 @@ final class EnigmaString extends EncryptString {
 
             char ref = REFLECTOR.charAt(mod159(li(c) - L));
 
-            int d = mod159(ROTORS[0].indexOf(ALPHA.charAt(mod159(li(ref) + L))) - L);
-            int e = mod159(ROTORS[1].indexOf(ALPHA.charAt(mod159(d + M))) - M);
-            char f = ALPHA.charAt(mod159(ROTORS[2].indexOf(ALPHA.charAt(mod159(e + R))) - R));
+            int d = mod159(ROTORS[0].indexOf(ENCRYPT_ALPHABET.charAt(mod159(li(ref) + L))) - L);
+            int e = mod159(ROTORS[1].indexOf(ENCRYPT_ALPHABET.charAt(mod159(d + M))) - M);
+            char f = ENCRYPT_ALPHABET.charAt(mod159(ROTORS[2].indexOf(ENCRYPT_ALPHABET.charAt(mod159(e + R))) - R));
 
             outStringStringBuilder.append(f);
 

@@ -17,9 +17,6 @@ final class AtbashString extends EncryptString {
     }
 
     //FIXME encryptKey - пока не учитывается в atbashEncrypting, только передается в xorEncrypting
-    //алфавит шифрования
-    private final static String ENCRYPT_ALPHABET =
-            "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIKLMNOPQRSTVXYZ /*-+абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghiklmnopqrsttvxyz0123456789";
     //сложность алфавита шифрования
     private final static int COMPLEXITY = ENCRYPT_ALPHABET.length() - 1;
 
