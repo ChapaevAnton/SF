@@ -10,10 +10,9 @@ import java.time.format.DateTimeFormatter;
  */
 
 abstract class EncryptString implements EncryptingString {
+
     //типы шифрования
     final static String NOT_ENCRYPT = "NOT_ENCRYPT";
-    final static String XOR_ENCRYPT = "XOR_ENCRYPT";
-    final static String ATBASH_ENCRYPT = "ATBASH_ENCRYPT";
 
     private String str; //текст
     private String typeCryptMethod; //методо шифрования
