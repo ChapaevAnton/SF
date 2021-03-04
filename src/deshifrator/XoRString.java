@@ -9,7 +9,7 @@ package deshifrator;
 final class XoRString extends EncryptString {
 
     //типы шифрования
-    final static String XOR_ENCRYPT = "XOR_ENCRYPT";
+    private final static String XOR_ENCRYPT = "XOR_ENCRYPT";
 
     XoRString(String str) {
         super(str, XOR_ENCRYPT, false);

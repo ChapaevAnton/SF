@@ -9,7 +9,7 @@ package deshifrator;
 final class AtbashString extends EncryptString {
 
     //типы шифрования
-    final static String ATBASH_ENCRYPT = "ATBASH_ENCRYPT";
+    private final static String ATBASH_ENCRYPT = "ATBASH_ENCRYPT";
 
     //конструктор
     AtbashString(String str) {

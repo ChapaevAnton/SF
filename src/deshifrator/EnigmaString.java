@@ -1,8 +1,14 @@
 package deshifrator;
 
+/**
+ * Класс шифрования алгоритм XOR
+ *
+ * @author https://github.com/Gurf
+ */
+
 final class EnigmaString extends EncryptString {
 
-    final static String ENIGMA_ENCRYPT = "ENIGMA_ENCRYPT";
+    private final static String ENIGMA_ENCRYPT = "ENIGMA_ENCRYPT";
 
     EnigmaString(String str) {
         super(str, ENIGMA_ENCRYPT, false);
@@ -22,34 +28,27 @@ final class EnigmaString extends EncryptString {
 //OPTIMIZE 04.03.2021 Теперь этот блок ненужен
 // (конструктор по умолчанию если только, что бы задвать дефолтные настройки роторов - только смысл какой)
 // public String encryptMessage и public String decryptMessage заменены интерфейсом EncryptingString - который имплементирован
-// в базовом абстрактном классе EncryptString. interface MessageEncryptable - больше ненужен - по ка не удалял его...
+// в базовом абстрактном классе EncryptString. interface MessageEncryptable @Deprecated - больше ненужен - пока не удалял его...
 
+//FIXME @Deprecated
 //    private String key;//Строка хранит ключ, фактически для шифрования используются 3 знака из алфавита Энигмы.
-
 //    public EnigmaString() {//Конструктор по умолчанию - задается изначальная настройка роторов:
 //                                                                     /* ротор I   :'A'
 //                                                                        ротор II  :'B'
 //                                                                        ротор III :'C'*/
 //        this("ABC");//ABC
 //    }
-
 //    public EnigmaString(String key) {
 //        this.key = key;
 //    }
-//
-//
 //    public void setKey(String key) {
 //        this.key = key;
 //    }
-
-
 //    @Override
-//
 //    public String encryptMessage(String message, String secretKey) {
 //        this.setKey(secretKey);
 //        return crypt(message);
 //    }
-//
 //    @Override
 //    public String decryptMessage(String message, String secretKey) {//Это Энигме не нужно
 //        this.setKey(secretKey);
