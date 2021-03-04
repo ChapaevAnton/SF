@@ -10,6 +10,9 @@ public interface CreatingString {
     //метод создание новой строки XoR
     CreatingString XoRString = str -> new XoRString(str);
 
+    //метод создания новой строки Enigma
+    CreatingString enigmaString = str -> new EnigmaString(str);
+
 }
 
 
