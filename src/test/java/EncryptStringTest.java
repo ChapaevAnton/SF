@@ -8,7 +8,7 @@ public class EncryptStringTest {
 
     @Test
     void toStringTest() {
-        String strIn = "test";
+        String strIn = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~«»АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя–";
         EncryptingString atbashString = CreatingString.atbashString.toCreate(strIn);
         EncryptingString XoRString = CreatingString.XoRString.toCreate(strIn);
         EncryptingString enigmaString = CreatingString.enigmaString.toCreate(strIn);

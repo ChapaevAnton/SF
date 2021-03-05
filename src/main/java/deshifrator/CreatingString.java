@@ -13,6 +13,15 @@ public interface CreatingString {
     //метод создания новой строки Enigma
     CreatingString enigmaString = str -> new EnigmaString(str);
 
+    public static CreatingString atbashString() {
+        return new CreatingString() {
+            @Override
+            public EncryptString toCreate(String str) {
+                return new EnigmaString(str);
+            }
+        };
+    }
+
 }
 
 

@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Шифрователь текса.");
+        System.out.println("Шифровать текст");
         System.out.print("Введите текст: ");
         String andrew = scanner.nextLine();
         System.out.print("Введите ключ: ");
@@ -16,7 +16,7 @@ public class Main {
 
         EncryptingString strCrypt = CreatingString.atbashString.toCreate(andrew);
         strCrypt.getStrInfo();
-        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ atbash:");
+        System.out.println("ЗАШИФРОВАНННОЕ СООБЩЕНИЕ atbash:");
         System.out.println(strCrypt.encrypt(key));
         System.out.println("ИСХОДНОЕ СООБЩЕНИЕ atbash:");
         System.out.println(strCrypt.deEncrypt(key));
