@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class EncryptStringTest {
 
     static String strIn;
-    static String strOut;
+    String strOut;
     EncryptingString atbashString;
     EncryptingString XoRString;
     EncryptingString enigmaString;
