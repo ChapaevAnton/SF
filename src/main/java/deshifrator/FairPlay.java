@@ -1,7 +1,6 @@
 package deshifrator;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class FairPlay {
 
@@ -61,30 +60,25 @@ public class FairPlay {
         //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
         //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
 
-        int x1, y1;
-        int x2, y2;
+        //перебираем массив биграммы
+        for (int i = 0; i < bigramm.length; i++) {
+            for (int j = 0; j < bigramm[i].length; j++) {
+
+                //перебираем массив алфавита
+                for (int x = 0; x < newAlphabet.length; x++) {
+                    for (int y = 0; y < newAlphabet[x].length; y++) {
 
 
-        for (int i = 0; i < newAlphabet.length; i++) {
-            for (int j = 0; j < newAlphabet[i].length; j++) {
+                        if (newAlphabet[x][y] == bigramm[i][j]) {
 
-                if (newAlphabet[i][j] == bigramm[0][0]) {
-                    x1 = i;
-                    y1 = j;
-                    System.out.println(bigramm[0][0] + "->" + x1 + " " + y1);
-                }
+                            System.out.println(bigramm[i][j] + "->" + x + " " + y);
+                        }
 
-                if (newAlphabet[i][j] == bigramm[0][1]) {
-
-                    x2 = i;
-                    y2 = j;
-                    System.out.println(bigramm[0][1] + "->" + x2 + " " + y2);
-                }
+                    }
+                } //перебираем массив алфавита
 
             }
-        }
-
-
+        }//перебираем массив биграммы
 
 
     }//конец метода
