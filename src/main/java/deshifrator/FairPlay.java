@@ -25,6 +25,7 @@ public class FairPlay {
 
     static void encrypt() {
 
+        // TODO: 07.03.2021 генерируем алфавит 
         char[] key = keys.toCharArray();
 
         String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
@@ -33,6 +34,7 @@ public class FairPlay {
         System.out.println(Arrays.toString(key));
         System.out.println(alphabets);
 
+        // TODO: 07.03.2021 преобразовываем алфавит в двумерный массив 5 на 5 
         char[] tempAlphabet = alphabets.toCharArray();
         char[][] newAlphabet = new char[5][5];
         for (int i = 0; i < newAlphabet.length; i++) {
@@ -42,6 +44,7 @@ public class FairPlay {
         }
         System.out.println(Arrays.deepToString(newAlphabet));
 
+        // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать 
         text = text.replaceAll(" ", "");
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
@@ -54,6 +57,7 @@ public class FairPlay {
         System.out.println(Arrays.deepToString((bigramm)));
 
 
+        // TODO: 07.03.2021 ищем координаты элементов биграммы
         //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
         //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
 
