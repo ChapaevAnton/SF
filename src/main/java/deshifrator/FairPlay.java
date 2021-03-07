@@ -1,6 +1,7 @@
 package deshifrator;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class FairPlay {
 
@@ -26,7 +27,7 @@ public class FairPlay {
 
         char[] key = keys.toCharArray();
 
-        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
         alphabets = keys + (alphabets.replaceAll("[" + keys + "]", ""));
 
         System.out.println(Arrays.toString(key));
@@ -39,11 +40,11 @@ public class FairPlay {
                 newAlphabet[i][j] = tempAlphabet[i * newAlphabet[j].length + j];
             }
         }
-//        System.out.println(Arrays.deepToString(newAlphabet));
+        System.out.println(Arrays.deepToString(newAlphabet));
 
         text = text.replaceAll(" ", "");
         char[][] bigramm = new char[text.length() / 2][2];
-//        System.out.println(text);
+        System.out.println(text);
         char[] arrayText = text.toCharArray();
         for (int i = 0; i < bigramm.length; i++) {
             for (int j = 0; j < bigramm[i].length; j++) {
@@ -51,7 +52,38 @@ public class FairPlay {
             }
         }
         System.out.println(Arrays.deepToString((bigramm)));
-    }
+
+
+        //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
+        //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
+
+        int x1, y1;
+        int x2, y2;
+
+
+        for (int i = 0; i < newAlphabet.length; i++) {
+            for (int j = 0; j < newAlphabet[i].length; j++) {
+
+                if (newAlphabet[i][j] == bigramm[0][0]) {
+                    x1 = i;
+                    y1 = j;
+                    System.out.println(bigramm[0][0] + "->" + x1 + " " + y1);
+                }
+
+                if (newAlphabet[i][j] == bigramm[0][1]) {
+
+                    x2 = i;
+                    y2 = j;
+                    System.out.println(bigramm[0][1] + "->" + x2 + " " + y2);
+                }
+
+            }
+        }
+
+
+
+
+    }//конец метода
 
 
 }
