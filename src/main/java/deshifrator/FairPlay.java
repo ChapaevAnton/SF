@@ -60,25 +60,52 @@ public class FairPlay {
         //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
         //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
 
+
+        int[][] coordinates = new int[2][2];
+        int[][] newCoordinates = new int[2][2];
+        int count = 0;
+
         //перебираем массив биграммы
         for (int i = 0; i < bigramm.length; i++) {
             for (int j = 0; j < bigramm[i].length; j++) {
 
                 //перебираем массив алфавита
-                for (int x = 0; x < newAlphabet.length; x++) {
-                    for (int y = 0; y < newAlphabet[x].length; y++) {
+                for (int k = 0; k < newAlphabet.length; k++) {
+                    for (int l = 0; l < newAlphabet[k].length; l++) {
 
-
-                        if (newAlphabet[x][y] == bigramm[i][j]) {
-
-                            System.out.println(bigramm[i][j] + "->" + x + " " + y);
+                        // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
+                        if (newAlphabet[k][l] == bigramm[i][j]) {
+                            coordinates[count][0] = k;
+                            coordinates[count][1] = l;
+                            count++;
                         }
-
                     }
                 } //перебираем массив алфавита
 
+            }//столбец
+
+            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
+            if (count == 2) {
+                count = 0;
             }
-        }//перебираем массив биграммы
+
+            newCoordinates[0][0]=coordinates[0][0];
+            newCoordinates[0][1]=coordinates[1][1];
+
+            newCoordinates[1][0]=coordinates[1][0];
+            newCoordinates[1][1]=coordinates[0][1];
+            //пары
+            System.out.println(Arrays.deepToString(coordinates));
+            System.out.println(Arrays.deepToString(newCoordinates));
+            System.out.println("======================");
+
+
+            System.out.println(newAlphabet[newCoordinates[0][0]][newCoordinates[0][1]]);
+            System.out.println(newAlphabet[newCoordinates[1][0]][newCoordinates[1][1]]);
+
+
+        }//строка
+        //перебираем массив биграммы
 
 
     }//конец метода
