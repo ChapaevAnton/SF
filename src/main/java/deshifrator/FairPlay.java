@@ -25,10 +25,12 @@ public class FairPlay {
 
 
     static void encrypt() {
+        // FIXME: 08.03.2021 мы ничего ни делаем с ключом, не убираем пробелы и не убираем одинаковы символы
+
 
         // TODO: 07.03.2021 генерируем алфавит 
         char[] key = keys.toCharArray();
-
+        // FIXME: 09.03.2021 J не кодируется - но есть идея как расширить алфавит - подсказка нужен всегда заполненный массив
         String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
         alphabets = keys + (alphabets.replaceAll("[" + keys + "]", ""));
 
@@ -47,7 +49,10 @@ public class FairPlay {
         //вывод для теста - уберем потом
         System.out.println(Arrays.deepToString(newAlphabet));
 
-        // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать 
+
+        // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
+        // FIXME: 08.03.2021 когда создаем биграммы мы не учитываем если количество символов в слове нечетное
+        // FIXME: 09.03.2021 мы ничего не делаем если биграмма из одинаковых символов
         text = text.replaceAll(" ", "");
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
