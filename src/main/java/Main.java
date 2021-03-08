@@ -16,9 +16,9 @@ public class Main {
 
         EncryptingString strCrypt = CreatingString.atbashString.toCreate(andrew);
         strCrypt.getStrInfo();
-        System.out.println("ЗАШИФРОВАНННОЕ СООБЩЕНИЕ atbash:");
+        System.out.println("ЗАШФРОВАНННОЕ СООБЩЕНЕ atbash:");
         System.out.println(strCrypt.encrypt(key));
-        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ atbash:");
+        System.out.println("СХОДНОЕ СООБЩЕНЕ atbash:");
         System.out.println(strCrypt.deEncrypt(key));
         String str = strCrypt.toString();
         System.out.println("atbash -> СТРОКА:");
@@ -26,19 +26,29 @@ public class Main {
 
         strCrypt = CreatingString.XoRString.toCreate(andrew);
         strCrypt.getStrInfo();
-        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ XoR:");
+        System.out.println("ЗАШФРОВАННОЕ СООБЩЕНЕ XoR:");
         System.out.println(strCrypt.encrypt(key));
-        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ XoR:");
+        System.out.println("СХОДНОЕ СООБЩЕНЕ XoR:");
         System.out.println(strCrypt.deEncrypt(key));
         str = strCrypt.toString();
         System.out.println("XoR -> СТРОКА:");
         System.out.println(str);
 
+        strCrypt = CreatingString.XoRStringII.toCreate(andrew);
+        strCrypt.getStrInfo();
+        System.out.println("ЗАШФРОВАННОЕ СООБЩЕНЕ XoRII:");
+        System.out.println(strCrypt.encrypt(key));
+        System.out.println("СХОДНОЕ СООБЩЕНЕ XoRII:");
+        System.out.println(strCrypt.deEncrypt(key));
+        str = strCrypt.toString();
+        System.out.println("XoRII -> СТРОКА:");
+        System.out.println(str);
+
         strCrypt = CreatingString.enigmaString.toCreate(andrew);
         strCrypt.getStrInfo();
-        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ enigma:");
+        System.out.println("ЗАШФРОВАННОЕ СООБЩЕНЕ enigma:");
         System.out.println(strCrypt.encrypt(key));
-        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ enigma:");
+        System.out.println("СХОДНОЕ СООБЩЕНЕ enigma:");
         System.out.println(strCrypt.deEncrypt(key));
         str=strCrypt.toString();
         System.out.println("enigma -> СТРОКА:");

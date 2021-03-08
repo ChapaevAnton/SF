@@ -18,6 +18,7 @@ final class XoRString extends EncryptString {
     @Override
     String encryptionAlgorithm(String text, String encryptKey) {
         char[] texts = text.toCharArray();
+
         byte[] keys = encryptKey.getBytes();
         int key = 0;
 

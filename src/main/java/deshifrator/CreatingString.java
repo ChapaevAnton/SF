@@ -2,6 +2,8 @@ package deshifrator;
 
 public interface CreatingString {
 
+    CreatingString XoRStringII = str -> new XoRStringII(str);
+
     EncryptString toCreate(String str);
 
     //метод создание новой строки atbash
