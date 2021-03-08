@@ -58,6 +58,7 @@ public class FairPlay {
 
 
         // TODO: 07.03.2021 ищем координаты элементов биграммы
+
         //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
         //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
 
@@ -91,7 +92,11 @@ public class FairPlay {
             if (count == 2) {
                 count = 0;
             }
+            // TODO: 08.03.2021 условия сдвигов
 
+
+
+            // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
             //замена координат - для получения координат новых букв
             int temp = coordinates[0][1];
             coordinates[0][1] = coordinates[1][1];
