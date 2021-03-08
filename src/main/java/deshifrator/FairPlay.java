@@ -13,6 +13,7 @@ public class FairPlay {
     static String keys = "TABLE";
     static String text = "FOR EXAMPLE";
     static String textCode = "";
+    static String textDeCode = "HMUBWBIREL";
 
     //TABLE ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
