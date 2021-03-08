@@ -13,7 +13,7 @@ public class FairPlay {
     static String keys = "TABLE";
     static String text = "FOR EXAMPLE";
     static String textCode = "";
-    static String textDeCode = "HMUBWBIREL";
+    static String textDeCode = "HM UB WB IR EL";
 
     //TABLE ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
@@ -32,6 +32,7 @@ public class FairPlay {
         String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
         alphabets = keys + (alphabets.replaceAll("[" + keys + "]", ""));
 
+        //вывод для теста - уберем потом
         System.out.println(Arrays.toString(key));
         System.out.println(alphabets);
 
@@ -43,6 +44,7 @@ public class FairPlay {
                 newAlphabet[i][j] = tempAlphabet[i * newAlphabet[j].length + j];
             }
         }
+        //вывод для теста - уберем потом
         System.out.println(Arrays.deepToString(newAlphabet));
 
         // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать 
@@ -55,46 +57,49 @@ public class FairPlay {
                 bigramm[i][j] = arrayText[i * bigramm[j].length + j];
             }
         }
+        //вывод для теста - уберем потом
         System.out.println(Arrays.deepToString((bigramm)));
 
 
         // TODO: 07.03.2021 ищем координаты элементов биграммы
 
-        //Pattern element1 = Pattern.compile("[" + bigramm[0][0] + "]");
-        //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
-
-
         //массив для хранения координат пар биграмм
         int[][] coordinates = new int[2][2];
-        int count = 0;
-
+        //счетчик ряда count_strings
+        //0 - ряд для координат первой буквы в биграмме
+        //1 - ряд для координат второй буквы в биграмме
+        int count_strings = 0;
 
         //перебираем массив биграммы
-        for (int i = 0; i < bigramm.length; i++) {
+        for (int i = 0; i < bigramm.length; i++) { //строки
 
-            for (int j = 0; j < bigramm[i].length; j++) {
+            do { //перещелкиваем ряды координаты
+                for (int j = 0; j < bigramm[i].length; j++) { //столбцы
 
-                //перебираем массив алфавита
-                for (int k = 0; k < newAlphabet.length; k++) {
-                    for (int l = 0; l < newAlphabet[k].length; l++) {
+                    //перебираем массив алфавита
+                    for (int k = 0; k < newAlphabet.length; k++) {
+                        for (int l = 0; l < newAlphabet[k].length; l++) {
 
-                        // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
-                        if (newAlphabet[k][l] == bigramm[i][j]) {
-                            coordinates[count][0] = k;
-                            coordinates[count][1] = l;
-                            count++;
+                            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
+                            if (newAlphabet[k][l] == bigramm[i][j]) {
+
+                                coordinates[count_strings][0] = k;
+                                coordinates[count_strings][1] = l;
+
+                                count_strings++;
+                            }
                         }
-                    }
-                } //перебираем массив алфавита
+                    } //перебираем массив алфавита
 
-            }//столбец
+                }//столбец
+            } while (count_strings != 2);
 
-            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
-            if (count == 2) {
-                count = 0;
-            }
+            // TODO: 08.03.2021 В ЭТОМ БЛОКЕ КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ - ПИСАТЬ КОД ТУТ !!!
+            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикл
+            // FIXME: 08.03.2021 может быть это заменить на do while - то есть обернуть цикл столбцов в него.
+            count_strings = 0;
+
             // TODO: 08.03.2021 условия сдвигов
-
 
 
             // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
@@ -104,23 +109,25 @@ public class FairPlay {
             coordinates[1][1] = temp;
 
 
-            //пары
-            System.out.println(Arrays.deepToString(coordinates));
-
-            System.out.println("======================");
-
-
-            System.out.println(newAlphabet[coordinates[0][0]][coordinates[0][1]]);
-            System.out.println(newAlphabet[coordinates[1][0]][coordinates[1][1]]);
-
+            //собираем строку шифрованную
             textCode = textCode.concat(Character.toString(newAlphabet[coordinates[0][0]][coordinates[0][1]])).
                     concat(Character.toString(newAlphabet[coordinates[1][0]][coordinates[1][1]])).concat(" ");
 
 
-        }//строка
+            //вывод для теста - уберем потом
+            System.out.println(Arrays.deepToString(coordinates));
+            System.out.println(newAlphabet[coordinates[0][0]][coordinates[0][1]]);
+            System.out.println(newAlphabet[coordinates[1][0]][coordinates[1][1]]);
+            System.out.println("======================");
+
+
+            // TODO: 08.03.2021 КОНЕЦ БЛОКА КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ !!!
+
+        }//строки
         //перебираем массив биграммы
 
 
+        //шифрованная строка
         System.out.println(textCode);
 
     }//конец метода
