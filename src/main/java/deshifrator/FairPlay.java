@@ -12,6 +12,7 @@ public class FairPlay {
             {'V', 'W', 'X', 'Y', 'Z'}};
     static String keys = "TABLE";
     static String text = "FOR EXAMPLE";
+    static String textCode = "";
 
     //TABLE ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
@@ -61,12 +62,14 @@ public class FairPlay {
         //Pattern element2 = Pattern.compile("[" + bigramm[0][1] + "]");
 
 
+        //массив для хранения координат пар биграмм
         int[][] coordinates = new int[2][2];
-        int[][] newCoordinates = new int[2][2];
         int count = 0;
+
 
         //перебираем массив биграммы
         for (int i = 0; i < bigramm.length; i++) {
+
             for (int j = 0; j < bigramm[i].length; j++) {
 
                 //перебираем массив алфавита
@@ -89,24 +92,30 @@ public class FairPlay {
                 count = 0;
             }
 
-            newCoordinates[0][0]=coordinates[0][0];
-            newCoordinates[0][1]=coordinates[1][1];
+            //замена координат - для получения координат новых букв
+            int temp = coordinates[0][1];
+            coordinates[0][1] = coordinates[1][1];
+            coordinates[1][1] = temp;
 
-            newCoordinates[1][0]=coordinates[1][0];
-            newCoordinates[1][1]=coordinates[0][1];
+
             //пары
             System.out.println(Arrays.deepToString(coordinates));
-            System.out.println(Arrays.deepToString(newCoordinates));
+
             System.out.println("======================");
 
 
-            System.out.println(newAlphabet[newCoordinates[0][0]][newCoordinates[0][1]]);
-            System.out.println(newAlphabet[newCoordinates[1][0]][newCoordinates[1][1]]);
+            System.out.println(newAlphabet[coordinates[0][0]][coordinates[0][1]]);
+            System.out.println(newAlphabet[coordinates[1][0]][coordinates[1][1]]);
+
+            textCode = textCode.concat(Character.toString(newAlphabet[coordinates[0][0]][coordinates[0][1]])).
+                    concat(Character.toString(newAlphabet[coordinates[1][0]][coordinates[1][1]])).concat(" ");
 
 
         }//строка
         //перебираем массив биграммы
 
+
+        System.out.println(textCode);
 
     }//конец метода
 
