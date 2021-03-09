@@ -1,5 +1,7 @@
 package deshifrator;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * Класс шифрования алгоритм XOR
  *

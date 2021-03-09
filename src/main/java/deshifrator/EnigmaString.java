@@ -55,7 +55,7 @@ final class EnigmaString extends EncryptString {
 //        return crypt(message);
 //    }
 
-    private int mod159(long a) {
+    private int mod162(long a) {
 
         return (int) ((a % 162 + 162) % 162);
     }
@@ -82,21 +82,21 @@ final class EnigmaString extends EncryptString {
             int ct_letter = li(text.charAt(i));
 
             //Вращение роторов осталось как у оригинальной Энигмы (когда правый доходит до 'W' и средний - до 'F')
-            R = mod159(++R);//крутим правый ротор
-            if (R == 55) M = mod159(++M);//крутим средний ротор, если правый дошел до 'W' (было: (R == 22))
+            R = mod162(++R);//крутим правый ротор
+            if (R == 55) M = mod162(++M);//крутим средний ротор, если правый дошел до 'W' (было: (R == 22))
             if (R == 55 && M == 38)
-                L = mod159(++L);//крутим левый ротор, если средний дошел до 'F' (было: (R == 22 && M == 5))
+                L = mod162(++L);//крутим левый ротор, если средний дошел до 'F' (было: (R == 22 && M == 5))
 
 
-            char a = ROTORS[2].charAt(mod159(R + ct_letter));
-            char b = ROTORS[1].charAt(mod159(M + li(a) - R));
-            char c = ROTORS[0].charAt(mod159(L + li(b) - M));
+            char a = ROTORS[2].charAt(mod162(R + ct_letter));
+            char b = ROTORS[1].charAt(mod162(M + li(a) - R));
+            char c = ROTORS[0].charAt(mod162(L + li(b) - M));
 
-            char ref = REFLECTOR.charAt(mod159(li(c) - L));
+            char ref = REFLECTOR.charAt(mod162(li(c) - L));
 
-            int d = mod159(ROTORS[0].indexOf(ENCRYPT_ALPHABET.charAt(mod159(li(ref) + L))) - L);
-            int e = mod159(ROTORS[1].indexOf(ENCRYPT_ALPHABET.charAt(mod159(d + M))) - M);
-            char f = ENCRYPT_ALPHABET.charAt(mod159(ROTORS[2].indexOf(ENCRYPT_ALPHABET.charAt(mod159(e + R))) - R));
+            int d = mod162(ROTORS[0].indexOf(ENCRYPT_ALPHABET.charAt(mod162(li(ref) + L))) - L);
+            int e = mod162(ROTORS[1].indexOf(ENCRYPT_ALPHABET.charAt(mod162(d + M))) - M);
+            char f = ENCRYPT_ALPHABET.charAt(mod162(ROTORS[2].indexOf(ENCRYPT_ALPHABET.charAt(mod162(e + R))) - R));
 
             outStringStringBuilder.append(f);
 
