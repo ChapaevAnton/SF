@@ -11,28 +11,24 @@ public class XoRStringII extends EncryptString {
 
     @Override
     String encryptionAlgorithm(String text, String encryptKey) {
-        char[] texts = text.toCharArray();//new char[text.length()];
+        //переводим строки шифруемого сообщения и ключа в массивы char
+        char[] texts = text.toCharArray();
         char[] key = encryptKey.toCharArray();
-//        char[] resultChar = new char[text.length()];
+
         for (int i = 0; i < text.length(); i++) {
 
-//            texts[i] = (char) (text.charAt(i)^encryptKey.charAt(i));
-
-            if (i >= key.length) {
-                texts[i] = (char) (texts[i] ^ key[i % key.length]);
-            } else {
+            if (i >= key.length) {//если шифруемая строка длиннее ключа
+                texts[i] = (char) (texts[i] ^ key[i % key.length]);//... то для побитового xor сложения
+                //используем char символы ключа "по кругу" пока не закончится шифруемая строка
+            } else {//иначе xor сложение идет каждого char символа исходной строки с каждым char символом ключа
                 texts[i] = (char) (texts[i] ^ key[i]);
             }
-
-
-
         }
         return String.valueOf(texts);
     }
 
-
-        @Override
-        String decryptionAlgorithm (String text, String encryptKey){
-            return encryptionAlgorithm(text, encryptKey);
-        }
+    @Override
+    String decryptionAlgorithm(String text, String encryptKey) {
+        return encryptionAlgorithm(text, encryptKey);
     }
+}
