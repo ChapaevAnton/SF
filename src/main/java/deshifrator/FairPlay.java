@@ -108,17 +108,6 @@ public class FairPlay {
 
             if (coordinates[0][0] == coordinates[1][0]) {
                 //сдвинуть на 1 эдемент вправо, а если элемент = индексу 4, то менять местами с индексом 0
-                ++coordinates[0][0];
-                ++coordinates[1][0];
-                if (coordinates[0][0] == 5) {
-                    coordinates[0][0] = 0;
-                }
-                if (coordinates[1][0] == 5) {
-                    coordinates[1][0] = 0;
-                }
-
-
-            } else if (coordinates[0][1] == coordinates[1][1]) {
                 ++coordinates[0][1];
                 ++coordinates[1][1];
                 if (coordinates[0][1] == 5) {
@@ -126,6 +115,17 @@ public class FairPlay {
                 }
                 if (coordinates[1][1] == 5) {
                     coordinates[1][1] = 0;
+                }
+
+
+            } else if (coordinates[0][1] == coordinates[1][1]) {
+                ++coordinates[0][0];
+                ++coordinates[1][0];
+                if (coordinates[0][0] == 5) {
+                    coordinates[0][0] = 0;
+                }
+                if (coordinates[1][0] == 5) {
+                    coordinates[1][0] = 0;
                 }
 
             } else {
