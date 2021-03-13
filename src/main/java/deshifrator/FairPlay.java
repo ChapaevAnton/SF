@@ -11,7 +11,8 @@ public class FairPlay {
             {'Q', 'R', 'S', 'T', 'U'},
             {'V', 'W', 'X', 'Y', 'Z'}};
     static String keys = "TABLE";
-    static String text = "FOR EXAMPLE";
+    static String text = "LL";
+    //    static String text = "FOR EXAMPLEAD I";
     static String textCode = "";
     static String textDeCode = "HM UB WB IR EL";
 
@@ -51,9 +52,21 @@ public class FairPlay {
 
 
         // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
-        // FIXME: 08.03.2021 когда создаем биграммы мы не учитываем если количество символов в слове нечетное
         // FIXME: 09.03.2021 мы ничего не делаем если биграмма из одинаковых символов
         text = text.replaceAll(" ", "");
+
+        int text_count = 0;
+        for (int x = 0; x < text.length(); x++) {
+            do {
+                if (text.charAt(x) == text.charAt(x + 1)) {
+                    text.charAt(x + 1) = 'X';
+                }
+            } while (text_count != 2);
+            text_count = 0;
+        }
+
+        int count_symbol = text.length();
+        if (count_symbol % 2 != 0) text = text + "X";
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
         char[] arrayText = text.toCharArray();
@@ -103,6 +116,17 @@ public class FairPlay {
             // FIXME: 08.03.2021 нужно оптимизировать, как то в цикл
             // FIXME: 08.03.2021 может быть это заменить на do while - то есть обернуть цикл столбцов в него.
             count_strings = 0;
+
+            /*if (coordinates[0][0] == coordinates[1][0] && coordinates[0][1] == coordinates[1][1]) {
+                for (int x = 0; x < bigramm.length; x++) {
+                    for (int y = 0; y < bigramm[x].length; y++ ) {
+                        if (bigramm[x][y] == 'X') {
+                            coordinates[1][0] = x;
+                            coordinates[1][1] = y;
+                        }
+                    }
+                }
+            }*/
 
             // TODO: 08.03.2021 условия сдвигов
 
