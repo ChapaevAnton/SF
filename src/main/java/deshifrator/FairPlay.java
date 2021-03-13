@@ -53,9 +53,11 @@ public class FairPlay {
         // OPTIMIZE: 13.03.2021  мы ничего не делаем если биграмма из одинаковых символов
         text = text.replaceAll(" ", "");
 
+        //если строка нечетная добавляем в конце X и делаем четной
         int count_symbol = text.length();
         if (count_symbol % 2 != 0) text = text + "X";
 
+        //если в биграмме одинаковые символы
         int begin_count = 0;
         int end_count = 2;
         String substring;
@@ -75,7 +77,7 @@ public class FairPlay {
         } while (end_count <= text.length());
         text = newText;
 
-
+        //формируем двумерный массив биграмм
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
         char[] arrayText = text.toCharArray();
@@ -109,7 +111,7 @@ public class FairPlay {
                     for (int k = 0; k < newAlphabet.length; k++) {
                         for (int l = 0; l < newAlphabet[k].length; l++) {
 
-                            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикле
+                            // // OPTIMIZE: 13.03.2021 возможно это можно как то более элегантно написать
                             if (newAlphabet[k][l] == bigramm[i][j]) {
 
                                 coordinates[count_strings][0] = k;
@@ -124,12 +126,10 @@ public class FairPlay {
             } while (count_strings != 2);
 
             // TODO: 08.03.2021 В ЭТОМ БЛОКЕ КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ - ПИСАТЬ КОД ТУТ !!!
-            // FIXME: 08.03.2021 нужно оптимизировать, как то в цикл
-            // FIXME: 08.03.2021 может быть это заменить на do while - то есть обернуть цикл столбцов в него.
             count_strings = 0;
 
             // TODO: 08.03.2021 условия сдвигов
-
+            // OPTIMIZE: 13.03.2021 оптимизировать перебор элементов
             if (coordinates[0][0] == coordinates[1][0]) {
                 //если строки равны
                 ++coordinates[0][1];
