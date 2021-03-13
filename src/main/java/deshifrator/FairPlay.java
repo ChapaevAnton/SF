@@ -27,9 +27,7 @@ public class FairPlay {
 
     static void encrypt() {
         // FIXME: 08.03.2021 мы ничего ни делаем с ключом, не убираем пробелы и не убираем одинаковы символы
-
-
-        // TODO: 07.03.2021 генерируем алфавит 
+        // TODO: 07.03.2021 генерируем алфавит
         char[] key = keys.toCharArray();
         // FIXME: 09.03.2021 J не кодируется - но есть идея как расширить алфавит - подсказка нужен всегда заполненный массив
         String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
@@ -52,7 +50,7 @@ public class FairPlay {
 
 
         // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
-        // FIXME: 09.03.2021 мы ничего не делаем если биграмма из одинаковых символов
+        // OPTIMIZE: 13.03.2021  мы ничего не делаем если биграмма из одинаковых символов
         text = text.replaceAll(" ", "");
 
         int count_symbol = text.length();
@@ -75,8 +73,8 @@ public class FairPlay {
             System.out.println("подстрока:" + substring);
             newText += substring;
         } while (end_count <= text.length());
-
         text = newText;
+
 
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
@@ -130,21 +128,10 @@ public class FairPlay {
             // FIXME: 08.03.2021 может быть это заменить на do while - то есть обернуть цикл столбцов в него.
             count_strings = 0;
 
-            /*if (coordinates[0][0] == coordinates[1][0] && coordinates[0][1] == coordinates[1][1]) {
-                for (int x = 0; x < bigramm.length; x++) {
-                    for (int y = 0; y < bigramm[x].length; y++ ) {
-                        if (bigramm[x][y] == 'X') {
-                            coordinates[1][0] = x;
-                            coordinates[1][1] = y;
-                        }
-                    }
-                }
-            }*/
-
             // TODO: 08.03.2021 условия сдвигов
 
             if (coordinates[0][0] == coordinates[1][0]) {
-                //сдвинуть на 1 эдемент вправо, а если элемент = индексу 4, то менять местами с индексом 0
+                //если строки равны
                 ++coordinates[0][1];
                 ++coordinates[1][1];
                 if (coordinates[0][1] == 5) {
@@ -154,7 +141,7 @@ public class FairPlay {
                     coordinates[1][1] = 0;
                 }
 
-
+                //если столбцы равны
             } else if (coordinates[0][1] == coordinates[1][1]) {
                 ++coordinates[0][0];
                 ++coordinates[1][0];
