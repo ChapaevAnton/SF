@@ -106,12 +106,36 @@ public class FairPlay {
 
             // TODO: 08.03.2021 условия сдвигов
 
+            if (coordinates[0][0] == coordinates[1][0]) {
+                //сдвинуть на 1 эдемент вправо, а если элемент = индексу 4, то менять местами с индексом 0
+                ++coordinates[0][0];
+                ++coordinates[1][0];
+                if (coordinates[0][0] == 5) {
+                    coordinates[0][0] = 0;
+                }
+                if (coordinates[1][0] == 5) {
+                    coordinates[1][0] = 0;
+                }
 
-            // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
-            //замена координат - для получения координат новых букв
-            int temp = coordinates[0][1];
-            coordinates[0][1] = coordinates[1][1];
-            coordinates[1][1] = temp;
+
+            } else if (coordinates[0][1] == coordinates[1][1]) {
+                ++coordinates[0][1];
+                ++coordinates[1][1];
+                if (coordinates[0][1] == 5) {
+                    coordinates[0][1] = 0;
+                }
+                if (coordinates[1][1] == 5) {
+                    coordinates[1][1] = 0;
+                }
+
+            } else {
+
+                // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
+                //замена координат - для получения координат новых букв
+                int temp = coordinates[0][1];
+                coordinates[0][1] = coordinates[1][1];
+                coordinates[1][1] = temp;
+            }
 
 
             //собираем строку шифрованную
