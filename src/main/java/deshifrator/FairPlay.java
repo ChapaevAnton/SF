@@ -11,8 +11,8 @@ public class FairPlay {
             {'Q', 'R', 'S', 'T', 'U'},
             {'V', 'W', 'X', 'Y', 'Z'}};
     static String keys = "TABLE";
-    static String text = "LL";
-    //    static String text = "FOR EXAMPLEAD I";
+    static String text = "MMTTKKRRY";
+    //static String text = "FOR EXAMPLEAD I";
     static String textCode = "";
     static String textDeCode = "HM UB WB IR EL";
 
@@ -55,21 +55,34 @@ public class FairPlay {
         // FIXME: 09.03.2021 мы ничего не делаем если биграмма из одинаковых символов
         text = text.replaceAll(" ", "");
 
-        int text_count = 0;
-        for (int x = 0; x < text.length(); x++) {
-            do {
-                if (text.charAt(x) == text.charAt(x + 1)) {
-                    text.charAt(x + 1) = 'X';
-                }
-            } while (text_count != 2);
-            text_count = 0;
-        }
-
         int count_symbol = text.length();
         if (count_symbol % 2 != 0) text = text + "X";
+
+        int begin_count = 0;
+        int end_count = 2;
+        String substring;
+        String newText = "";
+        do {
+            substring = text.substring(begin_count, end_count);
+            if (substring.length() == 2) {
+                if (substring.charAt(0) == substring.charAt(1)) {
+                    substring = substring.charAt(0) + "X";
+                }
+            }
+            begin_count += 2;
+            end_count += 2;
+
+            System.out.println("подстрока:" + substring);
+            newText += substring;
+        } while (end_count <= text.length());
+
+        text = newText;
+
         char[][] bigramm = new char[text.length() / 2][2];
         System.out.println(text);
         char[] arrayText = text.toCharArray();
+
+        // FIXME: 13.03.2021 если в слове кодируемом только две буквы не создается двумерный массив ошибка
         for (int i = 0; i < bigramm.length; i++) {
             for (int j = 0; j < bigramm[i].length; j++) {
                 bigramm[i][j] = arrayText[i * bigramm[j].length + j];
