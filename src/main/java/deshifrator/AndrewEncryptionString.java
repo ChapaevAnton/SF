@@ -6,13 +6,13 @@ package deshifrator;
  * @author https://github.com/Quertte
  */
 
-final class XoRString extends EncryptString {
+final class AndrewEncryptionString extends EncryptString {
 
     //типы шифрования
-    private final static String XOR_ENCRYPT = "XOR_ENCRYPT";
+    private final static String ANDREW_ENCRYPT = "ANDREW_ENCRYPT";
 
-    XoRString(String str) {
-        super(str, XOR_ENCRYPT, false);
+    AndrewEncryptionString(String str) {
+        super(str, ANDREW_ENCRYPT, false);
     }
 
     @Override

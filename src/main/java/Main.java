@@ -26,9 +26,9 @@ public class Main {
 
         strCrypt = CreatingString.XoRString.toCreate(andrew);
         strCrypt.getStrInfo();
-        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ XoR:");
+        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ andrew:");
         System.out.println(strCrypt.encrypt(key));
-        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ XoR:");
+        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ andrew:");
         System.out.println(strCrypt.deEncrypt(key));
         str = strCrypt.toString();
         System.out.println("XoR -> СТРОКА:");

@@ -34,7 +34,7 @@ final class AtbashString extends EncryptString {
                 encodedArray[i] = ENCRYPT_ALPHABET.charAt(index);
             } else {
                 //кодируем XOR если нет в алфавите
-                encodedArray[i] = new XoRString(Character.toString(encodedArray[i])).encrypt(encryptKey).toString().charAt(0);
+                encodedArray[i] = new AndrewEncryptionString(Character.toString(encodedArray[i])).encrypt(encryptKey).toString().charAt(0);
             }
         }
         text = String.valueOf(encodedArray);

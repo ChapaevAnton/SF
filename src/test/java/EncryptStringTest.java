@@ -10,7 +10,7 @@ public class EncryptStringTest {
     static String strIn;
     String strOut;
     EncryptingString atbashString;
-    EncryptingString XoRString;
+    EncryptingString andrewString;
     EncryptingString enigmaString;
 
     @Test
@@ -25,10 +25,10 @@ public class EncryptStringTest {
     void verifyingTheCreationOfEncryptedStrings() {
 
         atbashString = CreatingString.atbashString.toCreate(strIn);
-        XoRString = CreatingString.XoRString.toCreate(strIn);
+        andrewString = CreatingString.XoRString.toCreate(strIn);
         enigmaString = CreatingString.enigmaString.toCreate(strIn);
         assertNotNull(atbashString,"Error test notNull - atbashString");
-        assertNotNull(XoRString,"Error test notNull - XoRStringString");
+        assertNotNull(andrewString,"Error test notNull - XoRStringString");
         assertNotNull(enigmaString,"Error test notNull - enigmaString");
     }
 
@@ -39,7 +39,7 @@ public class EncryptStringTest {
     void translateEncryptedStringToString() {
 
         assertEquals(strIn, atbashString.toString(), "Error test toString() - atbashString");
-        assertEquals(strIn, XoRString.toString(), "Error test toString() - XoRStringString");
+        assertEquals(strIn, andrewString.toString(), "Error test toString() - XoRStringString");
         assertEquals(strIn, enigmaString.toString(), "Error test toString() - enigmaString");
     }
 
@@ -47,9 +47,9 @@ public class EncryptStringTest {
     @DisplayName("Тест шифрования/дешифрования алгоритм XoR")
     @Order(2)
     void encryptionAlgorithmCheckXorString() {
-        XoRString.encrypt(strIn);
-        XoRString.deEncrypt(strIn);
-        strOut = XoRString.toString();
+        andrewString.encrypt(strIn);
+        andrewString.deEncrypt(strIn);
+        strOut = andrewString.toString();
         assertEquals(strIn, strOut, "Error test encrypt() deEncrypt() - XoRString");
     }
 

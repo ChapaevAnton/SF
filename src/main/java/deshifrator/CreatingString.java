@@ -8,7 +8,7 @@ public interface CreatingString {
     CreatingString atbashString = str -> new AtbashString(str);
 
     //метод создание новой строки XoR
-    CreatingString XoRString = str -> new XoRString(str);
+    CreatingString XoRString = str -> new AndrewEncryptionString(str);
 
     //метод создания новой строки Enigma
     CreatingString enigmaString = str -> new EnigmaString(str);
