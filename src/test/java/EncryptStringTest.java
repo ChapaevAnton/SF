@@ -30,7 +30,8 @@ public class EncryptStringTest {
         xorString = CreatingString.XoRString.toCreate(strIn);
         enigmaString = CreatingString.enigmaString.toCreate(strIn);
         assertNotNull(atbashString, "Error test notNull - atbashString");
-        assertNotNull(andrewString, "Error test notNull - XoRStringString");
+        assertNotNull(andrewString, "Error test notNull - andrewString");
+        assertNotNull(xorString, "Error test notNull - xorString");
         assertNotNull(enigmaString, "Error test notNull - enigmaString");
     }
 
@@ -41,8 +42,8 @@ public class EncryptStringTest {
     void translateEncryptedStringToString() {
 
         assertEquals(strIn, atbashString.toString(), "Error test toString() - atbashString");
-        assertEquals(strIn, andrewString.toString(), "Error test toString() - andrewStringString");
-        assertEquals(strIn, xorString.toString(), "Error test toString() - XoRStringString");
+        assertEquals(strIn, andrewString.toString(), "Error test toString() - andrewString");
+        assertEquals(strIn, xorString.toString(), "Error test toString() - XoRString");
         assertEquals(strIn, enigmaString.toString(), "Error test toString() - enigmaString");
     }
 
@@ -53,7 +54,7 @@ public class EncryptStringTest {
         andrewString.encrypt(strIn);
         andrewString.deEncrypt(strIn);
         strOut = andrewString.toString();
-        assertEquals(strIn, strOut, "Error test encrypt() deEncrypt() - XoRString");
+        assertEquals(strIn, strOut, "Error test encrypt() deEncrypt() - andrewString");
     }
 
 }
