@@ -44,6 +44,16 @@ public class Main {
         System.out.println("XoR -> СТРОКА:");
         System.out.println(str);
 
+        strCrypt = CreatingString.XoRStringII.toCreate(andrew);
+        strCrypt.getStrInfo();
+        System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ XoRII:");
+        System.out.println(strCrypt.encrypt(key));
+        System.out.println("ИСХОДНОЕ СООБЩЕНИЕ XoRII:");
+        System.out.println(strCrypt.deEncrypt(key));
+        str = strCrypt.toString();
+        System.out.println("XoRII -> СТРОКА:");
+        System.out.println(str);
+
         strCrypt = CreatingString.enigmaString.toCreate(andrew);
         strCrypt.getStrInfo();
         System.out.println("ЗАШИФРОВАННОЕ СООБЩЕНИЕ enigma:");
