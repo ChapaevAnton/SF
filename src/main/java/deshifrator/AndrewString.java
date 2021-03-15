@@ -1,17 +1,17 @@
 package deshifrator;
 
 /**
- * Класс шифрования алгоритм XOR
+ * Класс шифрования алгоритм XOR from AndreDew
  *
  * @author https://github.com/Quertte
  */
 
-final class AndrewEncryptionString extends EncryptString {
+final class AndrewString extends EncryptString {
 
     //типы шифрования
     private final static String ANDREW_ENCRYPT = "ANDREW_ENCRYPT";
 
-    AndrewEncryptionString(String str) {
+    AndrewString(String str) {
         super(str, ANDREW_ENCRYPT, false);
     }
 

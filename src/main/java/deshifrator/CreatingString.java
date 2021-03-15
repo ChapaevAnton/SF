@@ -5,16 +5,16 @@ public interface CreatingString {
     EncryptString toCreate(String str);
 
     //метод создание новой строки atbash
-    CreatingString atbashString = str -> new AtbashString(str);
+    CreatingString atbashString = AtbashString::new;
 
     //метод создание новой строки andrew
-    CreatingString andrewString = str -> new AndrewEncryptionString(str);
+    CreatingString andrewString = AndrewString::new;
 
     //метод создания новой строки Enigma
-    CreatingString enigmaString = str -> new EnigmaString(str);
+    CreatingString enigmaString = EnigmaString::new;
 
     //метод создание новой строки XoR
-    CreatingString XoRString = str -> new XoRString(str);
+    CreatingString XoRString = XoRString::new;
 
 
 }

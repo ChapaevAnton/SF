@@ -24,37 +24,6 @@ final class EnigmaString extends EncryptString {
             };
     private static final String REFLECTOR = "–яюэьыъщшчцхфутсрпонмлкйизжедгвбаЯЮЭЬЫЪЩШЧЦХФУТСРПОНМЛКЙИЗЖЕДГВБА»«~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?>=<;:9876543210/.-,+*)('&%$#\"! ";//reflector -зазеркаленный алфавит (строка alpha)
 
-
-//OPTIMIZE 04.03.2021 Теперь этот блок ненужен
-// (конструктор по умолчанию если только, что бы задвать дефолтные настройки роторов - только смысл какой)
-// public String encryptMessage и public String decryptMessage заменены интерфейсом EncryptingString - который имплементирован
-// в базовом абстрактном классе EncryptString. interface MessageEncryptable @Deprecated - больше ненужен - пока не удалял его...
-
-//FIXME @Deprecated
-//    private String key;//Строка хранит ключ, фактически для шифрования используются 3 знака из алфавита Энигмы.
-//    public EnigmaString() {//Конструктор по умолчанию - задается изначальная настройка роторов:
-//                                                                     /* ротор I   :'A'
-//                                                                        ротор II  :'B'
-//                                                                        ротор III :'C'*/
-//        this("ABC");//ABC
-//    }
-//    public EnigmaString(String key) {
-//        this.key = key;
-//    }
-//    public void setKey(String key) {
-//        this.key = key;
-//    }
-//    @Override
-//    public String encryptMessage(String message, String secretKey) {
-//        this.setKey(secretKey);
-//        return crypt(message);
-//    }
-//    @Override
-//    public String decryptMessage(String message, String secretKey) {//Это Энигме не нужно
-//        this.setKey(secretKey);
-//        return crypt(message);
-//    }
-
     private int mod159(long a) {
 
         return (int) ((a % 162 + 162) % 162);
@@ -87,7 +56,6 @@ final class EnigmaString extends EncryptString {
             if (R == 55 && M == 38)
                 L = mod159(++L);//крутим левый ротор, если средний дошел до 'F' (было: (R == 22 && M == 5))
 
-
             char a = ROTORS[2].charAt(mod159(R + ct_letter));
             char b = ROTORS[1].charAt(mod159(M + li(a) - R));
             char c = ROTORS[0].charAt(mod159(L + li(b) - M));
@@ -99,7 +67,6 @@ final class EnigmaString extends EncryptString {
             char f = ENCRYPT_ALPHABET.charAt(mod159(ROTORS[2].indexOf(ENCRYPT_ALPHABET.charAt(mod159(e + R))) - R));
 
             outStringStringBuilder.append(f);
-
         }
         return outStringStringBuilder.toString();
     }
