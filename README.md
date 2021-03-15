@@ -77,9 +77,3 @@
 //перевод в String
 
 ```String toString();```
-
-```void getStrInfo();```
-
-//перевод в String
-
-```String toString();```
