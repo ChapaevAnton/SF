@@ -1,7 +1,6 @@
 package deshifrator;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class FairPlay extends EncryptString {
 
@@ -108,7 +107,9 @@ public class FairPlay extends EncryptString {
 
     private char[][] getCryptAlphabet(String key) {
 
-        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,! ";
+        // FIXME: 28.03.2021 из ключа не убираются одинаковые символы, есть решение либо regex либо hashset
+        //  - но пока рабочего варианта не нашли (\w)\1
+        String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //j
 
         key = key.replaceAll(" ", "").toUpperCase();
 
