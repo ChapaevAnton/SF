@@ -113,6 +113,8 @@ public class FairPlay extends EncryptString {
 
         key = key.replaceAll(" ", "").toUpperCase();
 
+        // FIXME: 28.03.2021 тут нужно убрать одинаковые символы из key
+
         alphabets = key + (alphabets.replaceAll("[" + key + "]", ""));
 
         // TODO: 07.03.2021 преобразовываем алфавит в двумерный массив 5 на 5
