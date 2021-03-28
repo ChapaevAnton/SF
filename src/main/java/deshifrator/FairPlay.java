@@ -2,120 +2,30 @@ package deshifrator;
 
 import java.util.Arrays;
 
-public class FairPlay {
+public class FairPlay extends EncryptString {
 
-    char[][] alphabet = {
-            {'A', 'B', 'C', 'D', 'E'},
-            {'F', 'G', 'H', 'I', 'K'},
-            {'L', 'M', 'N', 'O', 'P'},
-            {'Q', 'R', 'S', 'T', 'U'},
-            {'V', 'W', 'X', 'Y', 'Z'}};
-    static String keys = "TABLE";
-    //static String text = "MMTTKKRRY";
-    //static String text = "JET PACK";
-    //static String text = "FOR EXAMPLEAD I";
-    static String textCode = "";
-    static String textDeCode = "HM UB WB IR EL";
-    static String text = "NA AO TD MW ";
 
-    //TABLE ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    //типы шифрования
+    private final static String FAIR_ENCRYPT = "FAIR_ENCRYPT";
 
-    public static void main(String[] args) {
-
-        encrypt();
-
+    FairPlay(String str) {
+        super(str, FAIR_ENCRYPT, false);
     }
 
 
-    static void encrypt() {
-        // FIXME: 08.03.2021 мы ничего ни делаем с ключом, не убираем пробелы и не убираем одинаковы символы
-        // TODO: 07.03.2021 генерируем алфавит
-        char[] key = keys.toCharArray();
-        // FIXME: 09.03.2021 J не кодируется - но есть идея как расширить алфавит - подсказка нужен всегда заполненный массив
-        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,! "; //not J
-        alphabets = keys + (alphabets.replaceAll("[" + keys + "]", ""));
+    @Override
+    String encryptionAlgorithm(String text, String encryptKey) {
 
-        //вывод для теста - уберем потом
-        System.out.println(Arrays.toString(key));
-        System.out.println(alphabets);
-
-        // TODO: 07.03.2021 преобразовываем алфавит в двумерный массив 5 на 5 
-        char[] tempAlphabet = alphabets.toCharArray();
-        char[][] newAlphabet = new char[5][5];
-        for (int i = 0; i < newAlphabet.length; i++) {
-            for (int j = 0; j < newAlphabet[i].length; j++) {
-                newAlphabet[i][j] = tempAlphabet[i * newAlphabet[j].length + j];
-            }
-        }
-        //вывод для теста - уберем потом
-        System.out.println(Arrays.deepToString(newAlphabet));
-
-
-        // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
-        // OPTIMIZE: 13.03.2021  мы ничего не делаем если биграмма из одинаковых символов
-        text = text.replaceAll(" ", "");
-
-        //если строка нечетная добавляем в конце X и делаем четной
-        int count_symbol = text.length();
-        boolean uneven = false;
-        if (count_symbol % 2 != 0) {
-            text = text + "X";
-            uneven = true;
-        }
-
-        //если в биграмме одинаковые символы
-        int begin_count = 0;
-        int end_count = 2;
-        String substring;
-        String newText = "";
-        do {
-            substring = text.substring(begin_count, end_count);
-            if (substring.length() == 2) {
-                if (substring.charAt(0) == substring.charAt(1)) {
-                    substring = substring.charAt(0) + "X";
-                }
-            }
-            begin_count += 2;
-            end_count += 2;
-
-            System.out.println("подстрока:" + substring);
-            newText += substring;
-        } while (end_count <= text.length());
-        text = newText;
-
-        //формируем двумерный массив биграмм
-        char[] arrayText = text.toCharArray();
-        char[][] bigramm = new char[text.length() / 2][2];
-
-
-        System.out.println(text);
-
-
-        // FIXME: 13.03.2021 если в слове кодируемом только две буквы не создается двумерный массив ошибка
-
-        if (arrayText.length > 2) {
-
-            for (int i = 0; i < bigramm.length; i++) {
-                for (int j = 0; j < bigramm[i].length; j++) {
-                    bigramm[i][j] = arrayText[i * bigramm[j].length + j];
-                }
-            }
-            //вывод для теста - уберем потом
-            System.out.println(Arrays.deepToString((bigramm)));
-        } else {
-            for (int i = 0; i < bigramm[0].length; i++) {
-                bigramm[0][i] = arrayText[i];
-            }
-        }
-
-        // TODO: 07.03.2021 ищем координаты элементов биграммы
-
+        String cryptText="";
+        char[][] alphabet = getCryptAlphabet(encryptKey);
+        char[][] bigramm = getBigramm(text);
         //массив для хранения координат пар биграмм
         int[][] coordinates = new int[2][2];
         //счетчик ряда count_strings
         //0 - ряд для координат первой буквы в биграмме
         //1 - ряд для координат второй буквы в биграмме
         int count_strings = 0;
+
 
         //перебираем массив биграммы
         for (int i = 0; i < bigramm.length; i++) { //строки
@@ -124,15 +34,13 @@ public class FairPlay {
                 for (int j = 0; j < bigramm[i].length; j++) { //столбцы
 
                     //перебираем массив алфавита
-                    for (int k = 0; k < newAlphabet.length; k++) {
-                        for (int l = 0; l < newAlphabet[k].length; l++) {
+                    for (int k = 0; k < alphabet.length; k++) {
+                        for (int l = 0; l < alphabet[k].length; l++) {
 
-                            // // OPTIMIZE: 13.03.2021 возможно это можно как то более элегантно написать
-                            if (newAlphabet[k][l] == bigramm[i][j]) {
+                            if (alphabet[k][l] == bigramm[i][j]) {
 
                                 coordinates[count_strings][0] = k;
                                 coordinates[count_strings][1] = l;
-
                                 count_strings++;
                             }
                         }
@@ -179,15 +87,8 @@ public class FairPlay {
 
 
             //собираем строку шифрованную
-            textCode = textCode.concat(Character.toString(newAlphabet[coordinates[0][0]][coordinates[0][1]])).
-                    concat(Character.toString(newAlphabet[coordinates[1][0]][coordinates[1][1]])).concat(" ");
-
-
-            //вывод для теста - уберем потом
-            System.out.println(Arrays.deepToString(coordinates));
-            System.out.println(newAlphabet[coordinates[0][0]][coordinates[0][1]]);
-            System.out.println(newAlphabet[coordinates[1][0]][coordinates[1][1]]);
-            System.out.println("======================");
+            cryptText = cryptText.concat(Character.toString(alphabet[coordinates[0][0]][coordinates[0][1]])).
+                    concat(Character.toString(alphabet[coordinates[1][0]][coordinates[1][1]])).concat(" ");
 
 
             // TODO: 08.03.2021 КОНЕЦ БЛОКА КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ !!!
@@ -195,12 +96,94 @@ public class FairPlay {
         }//строки
         //перебираем массив биграммы
 
+        return cryptText;
+    }
 
-        //шифрованная строка
+    @Override
+    String decryptionAlgorithm(String text, String encryptKey) {
+        return null;
+    }
+
+
+    private char[][] getCryptAlphabet(String key) {
+
+        // FIXME: 28.03.2021 Нужно убрать пробелы из алфавита
+        //// FIXME: 28.03.2021 Сделать буквы заглавными
+        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,! ";
+        alphabets = key + (alphabets.replaceAll("[" + key + "]", ""));
+
+        // TODO: 07.03.2021 преобразовываем алфавит в двумерный массив 5 на 5
+        char[] tempAlphabet = alphabets.toCharArray();
+        char[][] newAlphabet = new char[5][5];
+        for (int i = 0; i < newAlphabet.length; i++) {
+            for (int j = 0; j < newAlphabet[i].length; j++) {
+                newAlphabet[i][j] = tempAlphabet[i * newAlphabet[j].length + j];
+            }
+        }
+        return newAlphabet;
+    }
+
+    private char[][] getBigramm(String str) {
+        // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
+        //// FIXME: 28.03.2021 Сделать буквы заглавными
+        str = str.replaceAll(" ", "");
+
+        //если строка нечетная добавляем в конце X и делаем четной
+
+        if (str.length() % 2 != 0) str = str + "X";
+
+        //если в биграмме одинаковые символы
+        int begin_count = 0;
+        int end_count = 2;
+
+        String substring;
+
+        String newText = "";
+        do {
+            substring = str.substring(begin_count, end_count);
+            if (substring.length() == 2) {
+                if (substring.charAt(0) == substring.charAt(1)) {
+                    substring = substring.charAt(0) + "X";
+                }
+            }
+            begin_count += 2;
+            end_count += 2;
+
+            newText += substring;
+        } while (end_count <= str.length());
+        str = newText;
+
+        //формируем двумерный массив биграмм
+        char[] arrayText = str.toCharArray();
+        char[][] bigramm = new char[str.length() / 2][2];
+
+
+        if (arrayText.length > 2) {
+
+            for (int i = 0; i < bigramm.length; i++) {
+                for (int j = 0; j < bigramm[i].length; j++) {
+                    bigramm[i][j] = arrayText[i * bigramm[j].length + j];
+                }
+            }
+            //вывод для теста - уберем потом
+            System.out.println(Arrays.deepToString((bigramm)));
+        } else {
+            for (int i = 0; i < bigramm[0].length; i++) {
+                bigramm[0][i] = arrayText[i];
+            }
+        }
+
+        return bigramm;
+    }
+
+
+    void encrypt() {
+
+
         // FIXME: 28.03.2021 для флага наличия икас в конце строки
         //if (uneven) textCode = new String(textCode.substring(0, textCode.length() - 1));
 
-        System.out.println(textCode);
+
     }//конец метода
 
 
