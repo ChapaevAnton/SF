@@ -11,10 +11,12 @@ public class FairPlay {
             {'Q', 'R', 'S', 'T', 'U'},
             {'V', 'W', 'X', 'Y', 'Z'}};
     static String keys = "TABLE";
-    static String text = "MMTTKKRRY";
+    //static String text = "MMTTKKRRY";
+    //static String text = "JET PACK";
     //static String text = "FOR EXAMPLEAD I";
     static String textCode = "";
     static String textDeCode = "HM UB WB IR EL";
+    static String text = "NA AO TD MW ";
 
     //TABLE ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
@@ -30,7 +32,7 @@ public class FairPlay {
         // TODO: 07.03.2021 генерируем алфавит
         char[] key = keys.toCharArray();
         // FIXME: 09.03.2021 J не кодируется - но есть идея как расширить алфавит - подсказка нужен всегда заполненный массив
-        String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //not J
+        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,! "; //not J
         alphabets = keys + (alphabets.replaceAll("[" + keys + "]", ""));
 
         //вывод для теста - уберем потом
@@ -55,7 +57,11 @@ public class FairPlay {
 
         //если строка нечетная добавляем в конце X и делаем четной
         int count_symbol = text.length();
-        if (count_symbol % 2 != 0) text = text + "X";
+        boolean uneven = false;
+        if (count_symbol % 2 != 0) {
+            text = text + "X";
+            uneven = true;
+        }
 
         //если в биграмме одинаковые символы
         int begin_count = 0;
@@ -78,19 +84,29 @@ public class FairPlay {
         text = newText;
 
         //формируем двумерный массив биграмм
-        char[][] bigramm = new char[text.length() / 2][2];
-        System.out.println(text);
         char[] arrayText = text.toCharArray();
+        char[][] bigramm = new char[text.length() / 2][2];
+
+
+        System.out.println(text);
+
 
         // FIXME: 13.03.2021 если в слове кодируемом только две буквы не создается двумерный массив ошибка
-        for (int i = 0; i < bigramm.length; i++) {
-            for (int j = 0; j < bigramm[i].length; j++) {
-                bigramm[i][j] = arrayText[i * bigramm[j].length + j];
+
+        if (arrayText.length > 2) {
+
+            for (int i = 0; i < bigramm.length; i++) {
+                for (int j = 0; j < bigramm[i].length; j++) {
+                    bigramm[i][j] = arrayText[i * bigramm[j].length + j];
+                }
+            }
+            //вывод для теста - уберем потом
+            System.out.println(Arrays.deepToString((bigramm)));
+        } else {
+            for (int i = 0; i < bigramm[0].length; i++) {
+                bigramm[0][i] = arrayText[i];
             }
         }
-        //вывод для теста - уберем потом
-        System.out.println(Arrays.deepToString((bigramm)));
-
 
         // TODO: 07.03.2021 ищем координаты элементов биграммы
 
@@ -181,8 +197,10 @@ public class FairPlay {
 
 
         //шифрованная строка
-        System.out.println(textCode);
+        // FIXME: 28.03.2021 для флага наличия икас в конце строки
+        //if (uneven) textCode = new String(textCode.substring(0, textCode.length() - 1));
 
+        System.out.println(textCode);
     }//конец метода
 
 
