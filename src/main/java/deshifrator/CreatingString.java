@@ -13,6 +13,7 @@ public interface CreatingString {
     //метод создания новой строки Enigma
     CreatingString enigmaString = str -> new EnigmaString(str);
 
+    //метод создания новой строки FairPlay
     CreatingString fairString = str -> new FairPlay(str);
 
 }

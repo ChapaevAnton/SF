@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class FairPlay extends EncryptString {
 
+    // FIXME: 28.03.2021 для флага наличия икас в конце строки
+    //if (uneven) textCode = new String(textCode.substring(0, textCode.length() - 1));
 
     //типы шифрования
     private final static String FAIR_ENCRYPT = "FAIR_ENCRYPT";
@@ -12,11 +14,10 @@ public class FairPlay extends EncryptString {
         super(str, FAIR_ENCRYPT, false);
     }
 
-
     @Override
     String encryptionAlgorithm(String text, String encryptKey) {
 
-        StringBuilder cryptText= new StringBuilder();
+        StringBuilder cryptText = new StringBuilder();
         char[][] alphabet = getCryptAlphabet(encryptKey);
         char[][] bigramm = getBigramm(text);
         //массив для хранения координат пар биграмм
@@ -30,7 +31,7 @@ public class FairPlay extends EncryptString {
         //перебираем массив биграммы
         for (int i = 0; i < bigramm.length; i++) { //строки
 
-            do { //перещелкиваем ряды координаты
+            do { //строки координат
                 for (int j = 0; j < bigramm[i].length; j++) { //столбцы
 
                     //перебираем массив алфавита
@@ -49,11 +50,9 @@ public class FairPlay extends EncryptString {
                 }//столбец
             } while (count_strings != 2);
 
-            // TODO: 08.03.2021 В ЭТОМ БЛОКЕ КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ - ПИСАТЬ КОД ТУТ !!!
             count_strings = 0;
 
-            // TODO: 08.03.2021 условия сдвигов
-            // OPTIMIZE: 13.03.2021 оптимизировать перебор элементов
+            // условия сдвигов
             if (point[0][0] == point[1][0]) {
                 //если строки равны
                 ++point[0][1];
@@ -78,20 +77,15 @@ public class FairPlay extends EncryptString {
 
             } else {
 
-                // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
-                //замена координат - для получения координат новых букв
+                // когда i и j не равны
                 int temp = point[0][1];
                 point[0][1] = point[1][1];
                 point[1][1] = temp;
             }
 
-
-            //собираем строку шифрованную
+            //собираем шифрованную строку
             cryptText.append(alphabet[point[0][0]][point[0][1]]).
                     append(alphabet[point[1][0]][point[1][1]]);
-
-
-            // TODO: 08.03.2021 КОНЕЦ БЛОКА КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ !!!
 
         }//строки
         //перебираем массив биграммы
@@ -104,11 +98,11 @@ public class FairPlay extends EncryptString {
         return encryptionAlgorithm(text, encryptKey);
     }
 
-
     private char[][] getCryptAlphabet(String key) {
 
         // FIXME: 28.03.2021 из ключа не убираются одинаковые символы, есть решение либо regex либо hashset
         //  - но пока рабочего варианта не нашли (\w)\1
+        // OPTIMIZE: 28.03.2021 доработать алфавит дополнительными символами кириллица, буква J, спецсимволы и т.п.
         String alphabets = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; //j
 
         key = key.replaceAll(" ", "").toUpperCase();
@@ -133,7 +127,6 @@ public class FairPlay extends EncryptString {
         str = str.replaceAll(" ", "").toUpperCase();
 
         //если строка нечетная добавляем в конце X и делаем четной
-
         if (str.length() % 2 != 0) str = str + "X";
 
         //если в биграмме одинаковые символы
@@ -142,7 +135,7 @@ public class FairPlay extends EncryptString {
 
         String substring;
 
-        String newText = "";
+        String newStr = "";
         do {
             substring = str.substring(begin_count, end_count);
             if (substring.length() == 2) {
@@ -153,9 +146,10 @@ public class FairPlay extends EncryptString {
             begin_count += 2;
             end_count += 2;
 
-            newText += substring;
+            newStr += substring;
         } while (end_count <= str.length());
-        str = newText;
+
+        str = newStr;
 
         //формируем двумерный массив биграмм
         char[] arrayText = str.toCharArray();
@@ -169,26 +163,14 @@ public class FairPlay extends EncryptString {
                     bigramm[i][j] = arrayText[i * bigramm[j].length + j];
                 }
             }
-            //вывод для теста - уберем потом
-            System.out.println(Arrays.deepToString((bigramm)));
         } else {
             for (int i = 0; i < bigramm[0].length; i++) {
                 bigramm[0][i] = arrayText[i];
             }
         }
-
+        //вывод для теста - уберем потом
+        System.out.println(Arrays.deepToString((bigramm)));
         return bigramm;
     }
-
-
-    void encrypt() {
-
-
-        // FIXME: 28.03.2021 для флага наличия икас в конце строки
-        //if (uneven) textCode = new String(textCode.substring(0, textCode.length() - 1));
-
-
-    }//конец метода
-
 
 }
