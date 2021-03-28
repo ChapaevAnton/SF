@@ -1,6 +1,7 @@
 package deshifrator;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class FairPlay extends EncryptString {
 
@@ -16,11 +17,11 @@ public class FairPlay extends EncryptString {
     @Override
     String encryptionAlgorithm(String text, String encryptKey) {
 
-        String cryptText="";
+        StringBuilder cryptText= new StringBuilder();
         char[][] alphabet = getCryptAlphabet(encryptKey);
         char[][] bigramm = getBigramm(text);
         //массив для хранения координат пар биграмм
-        int[][] coordinates = new int[2][2];
+        int[][] point = new int[2][2];
         //счетчик ряда count_strings
         //0 - ряд для координат первой буквы в биграмме
         //1 - ряд для координат второй буквы в биграмме
@@ -39,8 +40,8 @@ public class FairPlay extends EncryptString {
 
                             if (alphabet[k][l] == bigramm[i][j]) {
 
-                                coordinates[count_strings][0] = k;
-                                coordinates[count_strings][1] = l;
+                                point[count_strings][0] = k;
+                                point[count_strings][1] = l;
                                 count_strings++;
                             }
                         }
@@ -54,41 +55,41 @@ public class FairPlay extends EncryptString {
 
             // TODO: 08.03.2021 условия сдвигов
             // OPTIMIZE: 13.03.2021 оптимизировать перебор элементов
-            if (coordinates[0][0] == coordinates[1][0]) {
+            if (point[0][0] == point[1][0]) {
                 //если строки равны
-                ++coordinates[0][1];
-                ++coordinates[1][1];
-                if (coordinates[0][1] == 5) {
-                    coordinates[0][1] = 0;
+                ++point[0][1];
+                ++point[1][1];
+                if (point[0][1] == 5) {
+                    point[0][1] = 0;
                 }
-                if (coordinates[1][1] == 5) {
-                    coordinates[1][1] = 0;
+                if (point[1][1] == 5) {
+                    point[1][1] = 0;
                 }
 
                 //если столбцы равны
-            } else if (coordinates[0][1] == coordinates[1][1]) {
-                ++coordinates[0][0];
-                ++coordinates[1][0];
-                if (coordinates[0][0] == 5) {
-                    coordinates[0][0] = 0;
+            } else if (point[0][1] == point[1][1]) {
+                ++point[0][0];
+                ++point[1][0];
+                if (point[0][0] == 5) {
+                    point[0][0] = 0;
                 }
-                if (coordinates[1][0] == 5) {
-                    coordinates[1][0] = 0;
+                if (point[1][0] == 5) {
+                    point[1][0] = 0;
                 }
 
             } else {
 
                 // TODO: 08.03.2021 это нужно выполнять когда i и j не равны
                 //замена координат - для получения координат новых букв
-                int temp = coordinates[0][1];
-                coordinates[0][1] = coordinates[1][1];
-                coordinates[1][1] = temp;
+                int temp = point[0][1];
+                point[0][1] = point[1][1];
+                point[1][1] = temp;
             }
 
 
             //собираем строку шифрованную
-            cryptText = cryptText.concat(Character.toString(alphabet[coordinates[0][0]][coordinates[0][1]])).
-                    concat(Character.toString(alphabet[coordinates[1][0]][coordinates[1][1]])).concat(" ");
+            cryptText.append(alphabet[point[0][0]][point[0][1]]).
+                    append(alphabet[point[1][0]][point[1][1]]);
 
 
             // TODO: 08.03.2021 КОНЕЦ БЛОКА КООРДИНАТЫ БИГРАММ СФОРМИРОВАНЫ !!!
@@ -96,20 +97,21 @@ public class FairPlay extends EncryptString {
         }//строки
         //перебираем массив биграммы
 
-        return cryptText;
+        return cryptText.toString();
     }
 
     @Override
     String decryptionAlgorithm(String text, String encryptKey) {
-        return null;
+        return encryptionAlgorithm(text, encryptKey);
     }
 
 
     private char[][] getCryptAlphabet(String key) {
 
-        // FIXME: 28.03.2021 Нужно убрать пробелы из алфавита
-        //// FIXME: 28.03.2021 Сделать буквы заглавными
         String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,! ";
+
+        key = key.replaceAll(" ", "").toUpperCase();
+
         alphabets = key + (alphabets.replaceAll("[" + key + "]", ""));
 
         // TODO: 07.03.2021 преобразовываем алфавит в двумерный массив 5 на 5
@@ -125,8 +127,7 @@ public class FairPlay extends EncryptString {
 
     private char[][] getBigramm(String str) {
         // TODO: 07.03.2021 создаем биграммы из текста который будем шифровать
-        //// FIXME: 28.03.2021 Сделать буквы заглавными
-        str = str.replaceAll(" ", "");
+        str = str.replaceAll(" ", "").toUpperCase();
 
         //если строка нечетная добавляем в конце X и делаем четной
 

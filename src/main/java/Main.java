@@ -17,6 +17,7 @@ public class Main {
         EncryptingString strCrypt = CreatingString.fairString.toCreate(andrew);
         strCrypt.getStrInfo();
         System.out.println(strCrypt.encrypt(key));
+        /*System.out.println(strCrypt.deEncrypt(key));*/
 
 
 //        EncryptingString strCrypt = CreatingString.atbashString.toCreate(andrew);
